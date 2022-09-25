@@ -7,6 +7,8 @@ public class ShootScript : MonoBehaviour
     public GameObject ball;
     public float speed;
 
+    public float shootBallDist = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +22,14 @@ public class ShootScript : MonoBehaviour
         {
             if (IsBallShot())
             {
+                Debug.Log("ball shot");
                 // rotates ball in direction of camera
                 ball.transform.rotation = transform.rotation;
-
+                
                 // 0s velocity and adds forward force
                 Rigidbody rb = ball.GetComponent<Rigidbody>();
-                rb.velocity = Vector3.zero;
+                rb.isKinematic = false;
+                //rb.velocity = Vector3.zero;
                 rb.AddForce(ball.transform.forward * speed);
             }
         }
@@ -38,7 +42,19 @@ public class ShootScript : MonoBehaviour
         Vector3 camVector = camToBall * transform.forward;
         float reticleToBall = Vector3.Distance(ball.transform.position, transform.position + camVector);
 
-        return reticleToBall <= ball.GetComponent<SphereCollider>().radius;
+        return reticleToBall <= shootBallDist;
+    }
+
+    private bool isPointingBall()
+    {
+        RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, shootBallDist))
+        {
+            return hit.transform.GetComponent<VolleyBall>() != null;
+        }
+        return false;
     }
 
 }
