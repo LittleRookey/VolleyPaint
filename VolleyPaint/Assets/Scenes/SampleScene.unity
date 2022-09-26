@@ -480,7 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 285276165}
   speed: 900
-  shootBallDist: 3
+  shootBallDist: 15
 --- !u!1 &397116360
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class ShootScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (IsBallShot())
+            if (isPointingBall())
             {
                 Debug.Log("ball shot");
                 // rotates ball in direction of camera
@@ -48,13 +48,22 @@ public class ShootScript : MonoBehaviour
     private bool isPointingBall()
     {
         RaycastHit hit;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
+        //Vector3 dir = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, shootBallDist))
+
+        if (Physics.Raycast(ray, out hit, shootBallDist))
         {
+            Debug.Log(hit.transform.name);
             return hit.transform.GetComponent<VolleyBall>() != null;
         }
         return false;
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.black;
+    //    Gizmos.DrawLine(transform.position, transform.forward * shootBallDist);
+    //}
 
 }
