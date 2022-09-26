@@ -29,7 +29,7 @@ public class ShootScript : MonoBehaviour
                 // 0s velocity and adds forward force
                 Rigidbody rb = ball.GetComponent<Rigidbody>();
                 rb.isKinematic = false;
-                //rb.velocity = Vector3.zero;
+                rb.velocity = Vector3.zero;
                 rb.AddForce(ball.transform.forward * speed);
             }
         }
