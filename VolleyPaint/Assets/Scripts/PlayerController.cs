@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [Header("Camera")]
     public Transform cam;
@@ -35,6 +36,15 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
     private int jumpsSinceLastLand = 0;
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            Destroy(transform.Find("Main Camera").gameObject);
+            this.enabled = false;
+        }
+    }
 
     void Start()
     {

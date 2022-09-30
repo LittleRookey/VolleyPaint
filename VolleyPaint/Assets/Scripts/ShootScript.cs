@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootScript : MonoBehaviour
 {
-    public GameObject ball;
+    GameObject ball;
     public float speed;
 
     public float shootBallDist = 3f;
@@ -12,7 +12,7 @@ public class ShootScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ball = GameObject.FindGameObjectWithTag("Ball");
     }
 
     // Update is called once per frame
