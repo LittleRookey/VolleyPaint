@@ -8,12 +8,13 @@ public class ShootScript : NetworkBehaviour
     GameObject ball;
     public float speed;
 
-    public float ballSize = 3f;
+    private float ballSize;
 
     // Start is called before the first frame update
     void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
+        ballSize = ball.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class ShootScript : NetworkBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            if (isPointingBall())
+            if (IsBallShotRaycast())
             {
                 ShootBall(ball.transform.position, transform.rotation);
                 ShootBallServerRPC(ball.transform.position, transform.rotation);
@@ -31,7 +32,7 @@ public class ShootScript : NetworkBehaviour
         }
     }
 
-    // determines if some part of ball is on center of screen
+    // determines if some part of ball is on center of screen using vectors
     private bool IsBallShot()
     {
         Vector3 cameraPos = Camera.main.transform.position;
@@ -42,16 +43,21 @@ public class ShootScript : NetworkBehaviour
         Vector3 camVector = camToBall * cameraDir;
         float reticleToBall = Vector3.Distance(ballPos, cameraPos + camVector);
 
-        return reticleToBall <= ballSize;
+        return reticleToBall <= ballSize / 2;
     }
 
-    private bool isPointingBall()
+    // determines if some part of ball is on center of screen using raycast
+    private bool IsBallShotRaycast()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
         //Vector3 dir = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        return Physics.Raycast(ray, out hit);
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.collider.gameObject.tag == "Ball";
+        }
+        return false;
     }
     
     private void ShootBall(Vector3 position, Quaternion rotation)
