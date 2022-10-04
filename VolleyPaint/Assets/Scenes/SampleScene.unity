@@ -324,11 +324,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2318690051805250258, guid: 6ab9ec776c00feb44ad3e214b05f448f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3562273621088329095, guid: 6ab9ec776c00feb44ad3e214b05f448f,
         type: 3}
       propertyPath: m_RootOrder
@@ -389,13 +384,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 3562273621088329099, guid: 6ab9ec776c00feb44ad3e214b05f448f,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2318690051805250258, guid: 6ab9ec776c00feb44ad3e214b05f448f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab9ec776c00feb44ad3e214b05f448f, type: 3}
 --- !u!1 &410087039
 GameObject:

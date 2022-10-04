@@ -10,14 +10,6 @@ public class ShootScript : NetworkBehaviour
 
     public float ballSize = 3f;
 
-    //public override void OnNetworkSpawn()
-    //{
-    //    if (!IsOwner)
-    //    {
-    //        this.enabled = false;
-    //    }
-    //}
-
     // Start is called before the first frame update
     void Start()
     {
@@ -60,12 +52,6 @@ public class ShootScript : NetworkBehaviour
         //Vector3 dir = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         return Physics.Raycast(ray, out hit);
-        //if (Physics.Raycast(ray, out hit))
-        //{
-        //    Debug.Log(hit.transform.name);
-        //    return hit.transform.GetComponent<VolleyBall>() != null;
-        //}
-        //return false;
     }
     
     private void ShootBall(Vector3 position, Quaternion rotation)
