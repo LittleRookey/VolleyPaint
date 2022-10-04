@@ -5,16 +5,16 @@ using Unity.Netcode;
 
 public class ShootScript : NetworkBehaviour
 {
-    GameObject ball;
     public float speed;
 
-    private float ballSize;
-
+    private Transform ballTransform;
+    private Transform camTransform;
+    
     // Start is called before the first frame update
     void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
-        ballSize = ball.transform.localScale.x;
+        ballTransform = GameObject.FindGameObjectWithTag("Ball").transform;
+        camTransform = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -26,8 +26,11 @@ public class ShootScript : NetworkBehaviour
         {
             if (IsBallShotRaycast())
             {
-                ShootBall(ball.transform.position, transform.rotation);
-                ShootBallServerRPC(ball.transform.position, transform.rotation);
+                Vector3 ballPos = ballTransform.position;
+                Vector3 camDir = camTransform.forward;
+
+                ShootBall(ballPos, camDir);
+                ShootBallServerRPC(ballPos, camDir);
             }
         }
     }
@@ -35,15 +38,14 @@ public class ShootScript : NetworkBehaviour
     // determines if some part of ball is on center of screen using vectors
     private bool IsBallShot()
     {
-        Vector3 cameraPos = Camera.main.transform.position;
-        Vector3 cameraDir = Camera.main.transform.forward;
-        Vector3 ballPos = ball.transform.position;
+        Vector3 ballPos = ballTransform.position;
+        Vector3 cameraPos = camTransform.position;
 
         float camToBall = Vector3.Distance(ballPos, cameraPos);
-        Vector3 camVector = camToBall * cameraDir;
+        Vector3 camVector = camToBall * camTransform.forward;
         float reticleToBall = Vector3.Distance(ballPos, cameraPos + camVector);
 
-        return reticleToBall <= ballSize / 2;
+        return reticleToBall <= ballTransform.localScale.x / 2;
     }
 
     // determines if some part of ball is on center of screen using raycast
@@ -60,32 +62,30 @@ public class ShootScript : NetworkBehaviour
         return false;
     }
     
-    private void ShootBall(Vector3 position, Quaternion rotation)
+    private void ShootBall(Vector3 position, Vector3 direction)
     {
         Debug.Log("ball shot");
-        // rotates ball in direction of camera
-        ball.transform.position = position;
-        ball.transform.rotation = rotation;
+        // updates ball position to where it was hit so all ball instances across clients should take the same path
+        ballTransform.position = position;
 
         // 0s velocity and adds forward force
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        Rigidbody rb = ballTransform.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
-        rb.AddForce(ball.transform.forward * speed);
+        rb.AddForce(direction * speed);
     }
 
     [ServerRpc]
-    private void ShootBallServerRPC(Vector3 position, Quaternion rotation)
+    private void ShootBallServerRPC(Vector3 position, Vector3 direction)
     {
-        print("server rpc");
-        ShootBallClientRPC(position, rotation);
+        ShootBallClientRPC(position, direction);
     }
 
     [ClientRpc]
-    private void ShootBallClientRPC(Vector3 position, Quaternion rotation)
+    private void ShootBallClientRPC(Vector3 position, Vector3 direction)
     {
         if (IsOwner) return; // ignore client that shot ball since force was already added
-        ShootBall(position, rotation);
+        ShootBall(position, direction);
     }
 
     //private void OnDrawGizmos()
