@@ -17,6 +17,7 @@ public class VolleyBall : MonoBehaviour
         rb.isKinematic = true;
     }
 
+
     // Update is called once per frame
     void Update()
     {
