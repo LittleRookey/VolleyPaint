@@ -42,6 +42,7 @@ public class PlayerShoot : NetworkBehaviour
     {
         ballTransform = GameObject.FindGameObjectWithTag("Ball").transform;
         camTransform = Camera.main.transform;
+        shootType = eShootType.Hitscan;
     }
 
 

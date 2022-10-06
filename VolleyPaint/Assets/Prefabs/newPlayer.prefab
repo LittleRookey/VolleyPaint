@@ -532,12 +532,12 @@ MonoBehaviour:
     type: 3}
   gunShootPos: {fileID: 21724680310463145}
   shootType: 0
-  bulletSpeed: 100
+  bulletSpeed: 1000
   fireRate: 0.25
   bulletType: 0
   normal_hitImpact: {fileID: 1061481793025988, guid: 5752233f067735c45bf0f75f8afd4a3f,
     type: 3}
-  speed: 300
+  speed: 900
 --- !u!1001 &1620832043487426591
 PrefabInstance:
   m_ObjectHideFlags: 0
