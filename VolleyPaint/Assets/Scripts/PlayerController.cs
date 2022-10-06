@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using UnityEngine.Events;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -37,8 +36,6 @@ public class PlayerController : NetworkBehaviour
 
     private Vector3 velocity = Vector3.zero;
     private int jumpsSinceLastLand = 0;
-
-    public UnityAction OnShoot;
 
     public override void OnNetworkSpawn()
     {
