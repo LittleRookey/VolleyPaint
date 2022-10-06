@@ -764,10 +764,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols:
-    Android: MULTIPLAYER_ENABLED
-    Standalone: MULTIPLAYER_ENABLED
-    WebGL: MULTIPLAYER_ENABLED
+  scriptingDefineSymbols: {}
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
