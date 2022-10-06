@@ -1,63 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class ShootScript : MonoBehaviour
+public class ShootScript : NetworkBehaviour
 {
-    GameObject ball;
     public float speed;
 
-    public float shootBallDist = 3f;
-
+    private Transform ballTransform;
+    private Transform camTransform;
+    
     // Start is called before the first frame update
     void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
+        ballTransform = GameObject.FindGameObjectWithTag("Ball").transform;
+        camTransform = Camera.main.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
+
         if (Input.GetButtonDown("Fire1"))
         {
-            if (isPointingBall())
+            if (IsBallShotRaycast())
             {
-                Debug.Log("ball shot");
-                // rotates ball in direction of camera
-                ball.transform.rotation = transform.rotation;
-                
-                // 0s velocity and adds forward force
-                Rigidbody rb = ball.GetComponent<Rigidbody>();
-                rb.isKinematic = false;
-                rb.velocity = Vector3.zero;
-                rb.AddForce(ball.transform.forward * speed);
+                Vector3 ballPos = ballTransform.position;
+                Vector3 camDir = camTransform.forward;
+
+                ShootBall(ballPos, camDir);
+                ShootBallServerRPC(ballPos, camDir);
             }
         }
     }
 
-    // determines if some part of ball is on center of screen
+    // determines if some part of ball is on center of screen using vectors
     private bool IsBallShot()
     {
-        float camToBall = Vector3.Distance(ball.transform.position, transform.position);
-        Vector3 camVector = camToBall * transform.forward;
-        float reticleToBall = Vector3.Distance(ball.transform.position, transform.position + camVector);
+        Vector3 ballPos = ballTransform.position;
+        Vector3 cameraPos = camTransform.position;
 
-        return reticleToBall <= shootBallDist;
+        float camToBall = Vector3.Distance(ballPos, cameraPos);
+        Vector3 camVector = camToBall * camTransform.forward;
+        float reticleToBall = Vector3.Distance(ballPos, cameraPos + camVector);
+
+        return reticleToBall <= ballTransform.localScale.x / 2;
     }
 
-    private bool isPointingBall()
+    // determines if some part of ball is on center of screen using raycast
+    private bool IsBallShotRaycast()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
         //Vector3 dir = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-
-        if (Physics.Raycast(ray, out hit, shootBallDist))
+        if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.transform.name);
-            return hit.transform.GetComponent<VolleyBall>() != null;
+            return hit.collider.gameObject.tag == "Ball";
         }
         return false;
+    }
+    
+    private void ShootBall(Vector3 position, Vector3 direction)
+    {
+        Debug.Log("ball shot");
+        // updates ball position to where it was hit so all ball instances across clients should take the same path
+        ballTransform.position = position;
+
+        // 0s velocity and adds forward force
+        Rigidbody rb = ballTransform.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
+        rb.AddForce(direction * speed);
+    }
+
+    [ServerRpc]
+    private void ShootBallServerRPC(Vector3 position, Vector3 direction)
+    {
+        ShootBallClientRPC(position, direction);
+    }
+
+    [ClientRpc]
+    private void ShootBallClientRPC(Vector3 position, Vector3 direction)
+    {
+        if (IsOwner) return; // ignore client that shot ball since force was already added
+        ShootBall(position, direction);
     }
 
     //private void OnDrawGizmos()
@@ -65,5 +93,4 @@ public class ShootScript : MonoBehaviour
     //    Gizmos.color = Color.black;
     //    Gizmos.DrawLine(transform.position, transform.forward * shootBallDist);
     //}
-
 }
