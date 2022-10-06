@@ -17,6 +17,7 @@ public class NetworkIPSetter : MonoBehaviour
         // Getting ip address using host name
         IPHostEntry ip = Dns.GetHostEntry(host);
         Debug.Log(GetLocalIPAddress());
+        GetComponent<UnityTransport>().ConnectionData.Address = GetLocalIPAddress();
     }
 
     public static string GetLocalIPAddress()
