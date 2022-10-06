@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Kim_Scene.unity
     guid: 7946fdaf469d0fa40851e905def7389e
+  - enabled: 1
+    path: Assets/Scenes/Jim_Test.unity
+    guid: 4de4337603624f74192e62f56858892d
   m_configObjects: {}
