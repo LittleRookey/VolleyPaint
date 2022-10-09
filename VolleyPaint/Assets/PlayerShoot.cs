@@ -50,7 +50,7 @@ public class PlayerShoot : NetworkBehaviour
     void Update()
     {
         fireRateCountDown += Time.deltaTime;
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
 
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
