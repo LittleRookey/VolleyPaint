@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LobbyTestScene.unity
     guid: 232abe963fbeb9840acb863a395fb550
   - enabled: 0
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Kim_Scene.unity
     guid: 7946fdaf469d0fa40851e905def7389e
+  - enabled: 1
+    path: Assets/Scenes/Scorekeeping.unity
+    guid: 8eb6f24777004fb4889482db5a5b4881
   m_configObjects: {}

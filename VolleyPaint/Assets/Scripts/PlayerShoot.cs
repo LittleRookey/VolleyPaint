@@ -168,4 +168,10 @@ public class PlayerShoot : NetworkBehaviour
 
         return reticleToBall <= ballTransform.localScale.x / 2;
     }
+
+    // Replenishes player ammo
+    public void ReplenishAmmo()
+    {
+
+    }
 }
