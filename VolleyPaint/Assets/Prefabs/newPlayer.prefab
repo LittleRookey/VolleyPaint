@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 8527579545816297094}
   - component: {fileID: 8527579545816297093}
   - component: {fileID: 1620832043581643836}
+  - component: {fileID: -4832143378244238688}
   m_Layer: 0
   m_Name: newPlayer
   m_TagString: Untagged
@@ -527,7 +528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4be6688327d5fe469276a7e4101fcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunController: {fileID: 7724618796283051061}
   bulletPrefab: {fileID: 2755370251350509033, guid: ce539f93fde91b44fb83669860b216c7,
     type: 3}
   gunShootPos: {fileID: 21724680310463145}
@@ -538,6 +538,20 @@ MonoBehaviour:
     type: 3}
   ballSpeed: 900
   ballJumpSpeed: 900
+  bulletLimit: 0
+  jumpBulletLimit: 0
+--- !u!114 &-4832143378244238688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527579545816297118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039d6fffe66d904449166d827829ae97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1620832043487426591
 PrefabInstance:
   m_ObjectHideFlags: 0

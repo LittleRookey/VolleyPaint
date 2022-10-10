@@ -25,11 +25,11 @@ public class FloorManager : MonoBehaviour
         {
             if (owningTeam == Team.teamOne)
             {
-                manager.EndRound(Team.teamTwo);
+                manager.EndRoundServerRpc(Team.teamTwo);
             }
             else if (owningTeam == Team.teamTwo)
             {
-                manager.EndRound(Team.teamOne);
+                manager.EndRoundServerRpc(Team.teamOne);
             }
         }
     }

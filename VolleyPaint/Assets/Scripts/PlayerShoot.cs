@@ -35,12 +35,22 @@ public class PlayerShoot : NetworkBehaviour
     private Transform ballTransform;
     private Transform camTransform;
 
+    // Ammo limits
+    [SerializeField] private int bulletLimit;
+    [SerializeField] private int jumpBulletLimit;
+
+    private int bulletsLeft;
+    private int jumpBulletsLeft;
+
     // Start is called before the first frame update
     void Start()
     {
         ballTransform = GameObject.FindGameObjectWithTag("Ball").transform;
         camTransform = Camera.main.transform;
         bulletType = eBulletType.Hitscan;
+
+        bulletsLeft = bulletLimit;
+        jumpBulletsLeft = jumpBulletLimit;
     }
 
 
@@ -170,8 +180,10 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     // Replenishes player ammo
-    public void ReplenishAmmo()
+    [ClientRpc]
+    public void ReplenishAmmoClientRpc()
     {
-
+        bulletsLeft = bulletLimit;
+        jumpBulletsLeft = jumpBulletLimit;
     }
 }

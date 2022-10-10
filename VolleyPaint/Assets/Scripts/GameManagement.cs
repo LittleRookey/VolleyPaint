@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using TMPro;
 
 public enum Team
 {
@@ -11,20 +10,20 @@ public enum Team
 
 public class GameManagement : NetworkBehaviour
 {
-    [SerializeField] private int teamOneScore;
-    [SerializeField] private int teamTwoScore;
+    private int teamOnePlayers;
+    private int teamTwoPlayers;
 
-    [SerializeField] private TMP_Text teamOneScoreText;
-    [SerializeField] private TMP_Text teamTwoScoreText;
+    private NetworkVariable<int> teamOneScore;
+    private NetworkVariable<int> teamTwoScore;
 
     [SerializeField] private Transform teamOneBallSpawn;
     [SerializeField] private Transform teamTwoBallSpawn;
 
-    [SerializeField] private Team mostRecentlyShootingTeam;
-    [SerializeField] private Team servingTeam;
+    private Team mostRecentlyShootingTeam;
+    private Team servingTeam;
 
     [SerializeField] private float roundCooldownDuration;
-    [SerializeField] private float currentRoundCooldown;
+    private float currentRoundCooldown;
 
     private bool roundOver;
 
@@ -32,10 +31,16 @@ public class GameManagement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        teamOneScore = 0;
-        teamTwoScore = 0;
+        teamOnePlayers = 0;
+        teamTwoPlayers = 0;
+
+        teamOneScore = new NetworkVariable<int>(0);
+        teamTwoScore = new NetworkVariable<int>(0);
 
         currentRoundCooldown = 0.0f;
+
+        mostRecentlyShootingTeam = Team.none;
+        servingTeam = Team.teamOne;
 
         roundOver = false;
     }
@@ -43,9 +48,6 @@ public class GameManagement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        teamOneScoreText.text = teamOneScore.ToString();
-        teamTwoScoreText.text = teamTwoScore.ToString();
-
         if (roundOver)
         {
             currentRoundCooldown += Time.deltaTime;
@@ -54,37 +56,67 @@ public class GameManagement : NetworkBehaviour
             {
                 currentRoundCooldown = 0.0f;
                 roundOver = false;
+
+                GameObject.Find("Spawn Points").GetComponent<BallRespawn>().RespawnBallClientRpc(servingTeam);
             }
         }
     }
 
     // Change the tracker for the team that most recently shot
-    public void UpdateMostRecentlyShootingTeam(Team team)
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdateMostRecentlyShootingTeamServerRpc(Team team)
     {
         if (team != mostRecentlyShootingTeam)
         {
             mostRecentlyShootingTeam = team;
             foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
             {
-                player.GetComponent<PlayerShoot>().ReplenishAmmo(); // Currently a stub, will implement after scorekeeping done
+                player.GetComponent<PlayerShoot>().ReplenishAmmoClientRpc(); // Currently a stub, will implement after scorekeeping done
             }
         }
     }
 
     // Assign a point to winning team and start round cooldown
-    public void EndRound(Team winningTeam)
+    [ServerRpc(RequireOwnership=false)]
+    public void EndRoundServerRpc(Team winningTeam)
     {
         if (!roundOver)
         {
             if (winningTeam == Team.teamOne)
             {
-                teamOneScore += 1;
+                teamOneScore.Value += 1;
             }
             else if (winningTeam == Team.teamTwo)
             {
-                teamTwoScore += 1;
+                teamTwoScore.Value += 1;
             }
+            servingTeam = winningTeam;
+            mostRecentlyShootingTeam = Team.none;
             roundOver = true;
+        }
+    }
+
+    public int GetTeamOneScore()
+    {
+        return teamOneScore.Value;
+    }
+
+    public int GetTeamTwoScore()
+    {
+        return teamTwoScore.Value;
+    }
+
+    public Team GetTeamToAutoAssignTo()
+    {
+        if (teamOnePlayers <= teamTwoPlayers)
+        {
+            teamOnePlayers += 1;
+            return Team.teamOne;
+        }
+        else
+        {
+            teamTwoPlayers += 1;
+            return Team.teamTwo;
         }
     }
 }
