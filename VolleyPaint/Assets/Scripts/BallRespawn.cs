@@ -35,5 +35,18 @@ public class BallRespawn : NetworkBehaviour
         }
     }
 
+    public Vector3 GetSpawnPos(Team team)
+    {
+        if (team == Team.teamOne)
+        {
+            return teamOneBallSpawn.position;
+        }
+        else if (team == Team.teamTwo)
+        {
+            return teamTwoBallSpawn.position;
+        }
+        return new Vector3(0, 0, 0);
+    }
+
 
 }
