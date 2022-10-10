@@ -16,9 +16,6 @@ public class GameManagement : NetworkBehaviour
     private NetworkVariable<int> teamOneScore;
     private NetworkVariable<int> teamTwoScore;
 
-    [SerializeField] private Transform teamOneBallSpawn;
-    [SerializeField] private Transform teamTwoBallSpawn;
-
     private Team mostRecentlyShootingTeam;
     private Team servingTeam;
 
