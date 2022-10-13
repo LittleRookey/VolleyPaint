@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * moveSpeed, ForceMode.VelocityChange);
-        //Destroy(gameObject, 2f);
+        Destroy(gameObject, 2f);
     }
 
 
