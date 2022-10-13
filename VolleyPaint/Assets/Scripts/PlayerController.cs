@@ -44,7 +44,8 @@ public class PlayerController : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            Destroy(transform.Find("Main Camera").gameObject);
+            transform.Find("Main Camera").gameObject.GetComponent<Camera>().enabled = false;
+            transform.Find("Main Camera").gameObject.GetComponent<AudioListener>().enabled = false;
             this.enabled = false;
         }
     }

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using DarkTonic.MasterAudio;
 
-public class GunController : MonoBehaviour
+public class GunController : NetworkBehaviour
 {
     public List<GameObject> guns;
     public float gunChangeSpeed = 3f;
@@ -34,10 +35,29 @@ public class GunController : MonoBehaviour
         guns[activeGunIndex].gameObject.SetActive(true);
     }
 
-    public void ChangeGunMode(eBulletType bulletType)
+    void Update()
     {
+        if (!IsOwner) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChangeGunMode(eShootType.Normal);
+            ChangeGunModeServerRPC(eShootType.Normal);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChangeGunMode(eShootType.Jump);
+            ChangeGunModeServerRPC(eShootType.Jump);
+        }
+    }
+
+    public void ChangeGunMode(eShootType shootType)
+    {
+        // set player shoot type in PlayerShoot script
+        transform.parent.parent.GetComponent<PlayerShoot>().shootType = shootType;
+
         guns[activeGunIndex].gameObject.SetActive(false);
-        activeGunIndex = (int)bulletType;
+        activeGunIndex = (int)shootType;
         guns[activeGunIndex].transform.localPosition = holsterGunPos;
         guns[activeGunIndex].gameObject.SetActive(true);
         MasterAudio.PlaySound3DAtVector3("Pistol Holster", transform.position);
@@ -52,6 +72,20 @@ public class GunController : MonoBehaviour
             go.transform.localPosition += Vector3.up * 0.001f * gunChangeSpeed;
             yield return sec;
         }
+    }
+
+
+    [ServerRpc]
+    private void ChangeGunModeServerRPC(eShootType shootType)
+    {
+        ChangeGunModeClientRPC(shootType);
+    }
+
+    [ClientRpc] // server telling the clients to do something
+    private void ChangeGunModeClientRPC(eShootType shootType)
+    {
+        if (IsOwner) return; // ignore client that shot ball since force was already added
+        ChangeGunMode(shootType);
     }
 }
 
