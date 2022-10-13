@@ -7,6 +7,9 @@ public class TeamAssignment : NetworkBehaviour
 {
     public Team assignedTeam;
 
+    public Vector3 teamOneSpawn;
+    public Vector3 teamTwoSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,17 +17,17 @@ public class TeamAssignment : NetworkBehaviour
 
         if (assignedTeam == Team.teamOne)
         {
-            transform.position = GameObject.Find("Team 1 Ball Spawn").transform.position;
+            transform.position = teamOneSpawn;
         }
         else if (assignedTeam == Team.teamTwo)
         {
-            transform.position = GameObject.Find("Team 2 Ball Spawn").transform.position;
+            transform.position = teamTwoSpawn;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
