@@ -28,10 +28,11 @@ public class RelayManager : MonoBehaviour
         public byte[] Key;
     }
 
-    [SerializeField] private TMP_Text _joinCodeText;
-    [SerializeField] private TMP_InputField _joinInput;
-    [SerializeField] private GameObject _buttons;
+    [SerializeField] private TMP_Text _joinCodeOutput;
+    [SerializeField] private TMP_InputField _joinCodeInput;
     [SerializeField] private Camera mainMenuCamera;
+    [SerializeField] private GameObject scoreKeepingCanvas;
+    [SerializeField] private GameObject mainMenuCanvas;
 
     private UnityTransport _transport;
     [SerializeField] private const int MaxPlayers = 5;
@@ -40,12 +41,12 @@ public class RelayManager : MonoBehaviour
     {
         _transport = FindObjectOfType<UnityTransport>();
 
-        _buttons.SetActive(false);
+        mainMenuCanvas.SetActive(false);
 
         // Every unity services need authentication
         await Authenticate();
 
-        _buttons.SetActive(true);
+        mainMenuCanvas.SetActive(true);
     }
 
     private static async Task Authenticate()
@@ -61,31 +62,39 @@ public class RelayManager : MonoBehaviour
 
     public async void CreateGame()
     {
-        _buttons.SetActive(false);
-         // don't need to know ip addresses
+        OnGameStart();
+
+        // don't need to know ip addresses
 
         Allocation alloc = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
 
-        _joinCodeText.text = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
+        _joinCodeOutput.text = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
 
         // Relay needs to use transport
         // if unity, use unity transport. if Steam, use steam transport.
 
         // Make sure to set host relay data on host and Client Relay data on client
         _transport.SetHostRelayData(alloc.RelayServer.IpV4, (ushort)alloc.RelayServer.Port, alloc.AllocationIdBytes, alloc.Key, alloc.ConnectionData);
-
-        mainMenuCamera.gameObject.SetActive(false);
         NetworkManager.Singleton.StartHost();
     }
 
     public async void JoinGame()
     {
-        _buttons.SetActive(false);
-        
-        JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode: _joinInput.text);
+        OnGameStart();
+
+        JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode: _joinCodeInput.text);
 
         _transport.SetClientRelayData(alloc.RelayServer.IpV4, (ushort)alloc.RelayServer.Port, alloc.AllocationIdBytes, alloc.Key, alloc.ConnectionData, alloc.HostConnectionData);
-        mainMenuCamera.gameObject.SetActive(false);
         NetworkManager.Singleton.StartClient();
+    }
+
+    private void OnGameStart()
+    {
+        // disable main menu
+        mainMenuCanvas.SetActive(false);
+        mainMenuCamera.gameObject.SetActive(false);
+
+        // enable score keeping UI
+        scoreKeepingCanvas.SetActive(true);
     }
 }
