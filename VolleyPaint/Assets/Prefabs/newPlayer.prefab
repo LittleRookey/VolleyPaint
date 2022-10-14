@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 3233990949964637707}
   m_Layer: 0
   m_Name: newPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -514,8 +514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedTeam: 0
-  teamOneSpawn: {x: 0, y: 1, z: -24}
-  teamTwoSpawn: {x: 0, y: 1, z: 24}
+  teamOneSpawn: {x: 0, y: 8, z: -24}
+  teamTwoSpawn: {x: 0, y: 8, z: 35}
 --- !u!114 &4732622747919604370
 MonoBehaviour:
   m_ObjectHideFlags: 0
