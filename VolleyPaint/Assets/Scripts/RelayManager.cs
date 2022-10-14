@@ -31,6 +31,7 @@ public class RelayManager : MonoBehaviour
     [SerializeField] private TMP_Text _joinCodeText;
     [SerializeField] private TMP_InputField _joinInput;
     [SerializeField] private GameObject _buttons;
+    [SerializeField] private Camera mainMenuCamera;
 
     private UnityTransport _transport;
     [SerializeField] private const int MaxPlayers = 5;
@@ -73,7 +74,7 @@ public class RelayManager : MonoBehaviour
         // Make sure to set host relay data on host and Client Relay data on client
         _transport.SetHostRelayData(alloc.RelayServer.IpV4, (ushort)alloc.RelayServer.Port, alloc.AllocationIdBytes, alloc.Key, alloc.ConnectionData);
 
-
+        mainMenuCamera.gameObject.SetActive(false);
         NetworkManager.Singleton.StartHost();
     }
 
@@ -84,7 +85,7 @@ public class RelayManager : MonoBehaviour
         JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode: _joinInput.text);
 
         _transport.SetClientRelayData(alloc.RelayServer.IpV4, (ushort)alloc.RelayServer.Port, alloc.AllocationIdBytes, alloc.Key, alloc.ConnectionData, alloc.HostConnectionData);
-
+        mainMenuCamera.gameObject.SetActive(false);
         NetworkManager.Singleton.StartClient();
     }
 }
