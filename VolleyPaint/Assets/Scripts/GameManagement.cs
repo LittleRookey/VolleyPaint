@@ -10,9 +10,6 @@ public enum Team
 
 public class GameManagement : NetworkBehaviour
 {
-    private int teamOnePlayers;
-    private int teamTwoPlayers;
-
     private NetworkVariable<int> teamOneScore;
     private NetworkVariable<int> teamTwoScore;
 
@@ -28,9 +25,6 @@ public class GameManagement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        teamOnePlayers = 0;
-        teamTwoPlayers = 0;
-
         teamOneScore = new NetworkVariable<int>(0);
         teamTwoScore = new NetworkVariable<int>(0);
 
@@ -105,14 +99,14 @@ public class GameManagement : NetworkBehaviour
 
     public Team GetTeamToAutoAssignTo()
     {
-        if (teamOnePlayers <= teamTwoPlayers)
+        int totalPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
+        print(totalPlayers);
+        if (totalPlayers % 2 == 1)
         {
-            teamOnePlayers += 1;
             return Team.teamOne;
         }
         else
         {
-            teamTwoPlayers += 1;
             return Team.teamTwo;
         }
     }

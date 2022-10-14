@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
 
-public class TeamAssignment : NetworkBehaviour
+public class TeamAssignment : MonoBehaviour
 {
     public Team assignedTeam;
 
@@ -15,14 +14,23 @@ public class TeamAssignment : NetworkBehaviour
     {
         assignedTeam = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamToAutoAssignTo();
 
+        // turn off character controller before teleporting
+        CharacterController cc = gameObject.GetComponent<CharacterController>();
+        cc.enabled = false;
+
         if (assignedTeam == Team.teamOne)
         {
+            print("Player joined Team 1");
             transform.position = teamOneSpawn;
         }
         else if (assignedTeam == Team.teamTwo)
         {
+            print("Player joined Team 2");
             transform.position = teamTwoSpawn;
+            transform.localRotation *= Quaternion.Euler(0, 180, 0);
         }
+
+        cc.enabled = true;
     }
 
     // Update is called once per frame
