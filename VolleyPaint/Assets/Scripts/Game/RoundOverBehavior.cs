@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorManager : MonoBehaviour
+public class RoundOverBehavior : MonoBehaviour
 {
     [SerializeField] private Team owningTeam;
     [SerializeField] private GameManagement manager;

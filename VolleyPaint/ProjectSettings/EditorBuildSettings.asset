@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scorekeeping.unity
     guid: 8eb6f24777004fb4889482db5a5b4881
   - enabled: 0

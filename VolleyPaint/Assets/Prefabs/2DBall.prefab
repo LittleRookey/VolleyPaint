@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2331870954213194566}
   - component: {fileID: 2331870954213194571}
   m_Layer: 5
-  m_Name: BallOBJ
+  m_Name: 2DBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
