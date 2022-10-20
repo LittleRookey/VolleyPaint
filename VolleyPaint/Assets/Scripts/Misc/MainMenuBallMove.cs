@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallMove : MonoBehaviour
+public class MainMenuBallMove : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector3 lastVelocity;
@@ -13,7 +13,7 @@ public class BallMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         var xStrength = Random.Range(300, 500) * (Random.Range(0, 1) == 0 ? -1 : 1);
         var yStrength = Random.Range(300, 500) * (Random.Range(0, 1) == 0 ? -1 : 1);
-        Debug.Log(xStrength + " " + yStrength);
+        //Debug.Log(xStrength + " " + yStrength);
         rb.AddForce(new Vector2(xStrength, yStrength));
     }
 

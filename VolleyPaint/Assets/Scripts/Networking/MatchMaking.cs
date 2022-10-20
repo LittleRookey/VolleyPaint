@@ -11,6 +11,7 @@ using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Services.Authentication;
+using TMPro;
 
 #if UNITY_EDITOR
 using ParrelSync;
@@ -19,26 +20,29 @@ using ParrelSync;
 public class MatchMaking : MonoBehaviour
 {
     [SerializeField] private GameObject _buttons;
+
+    [SerializeField] private TMP_Text _joinCodeOutput;
+    [SerializeField] private TMP_InputField _joinCodeInput;
+    [SerializeField] private GameObject uiManager;
+    [SerializeField] private const int maxPlayers = 11;
+
     private Lobby _connectedLobby;
     private QueryResponse _lobbies;
     private UnityTransport _transport;
     private const string JoinCodeKey = "j";
     private string _playerID;
 
-    private void Awake()
+    private async void Awake()
     {
         _transport = FindObjectOfType<UnityTransport>();
-    }
 
-    public async void CreateOrJoinLobby()
-    {
+        // Every unity services need authentication
         await Authenticate();
 
-        _connectedLobby = await QuickJoinLobby() ?? await CreateLobby();
-
-        if (_connectedLobby != null) _buttons.SetActive(false);
-    }
-
+        // enables main menu, so we can keep disabled until it connects to Unity
+        uiManager.GetComponent<UIManager>().SetGameActive(false);
+    }    
+    
     private async Task Authenticate()
     {
         var options = new InitializationOptions();
@@ -54,49 +58,74 @@ public class MatchMaking : MonoBehaviour
         _playerID = AuthenticationService.Instance.PlayerId;
     }
 
+    // quick play - join lobby if available or create one if not
+    public async void CreateOrJoinLobby()
+    {
+        // await Authenticate();
+
+        _connectedLobby = await QuickJoinLobby() ?? await CreateLobby();
+    }
+
     private async Task<Lobby> QuickJoinLobby()
     {
-        try {
+        try 
+        {
             // Attempt to join lobby in progress
             var lobby = await Lobbies.Instance.QuickJoinLobbyAsync();
 
             // If we found one, grab the relay allocation details
-            var a = await RelayService.Instance.JoinAllocationAsync(lobby.Data[JoinCodeKey].Value);
+            await JoinLobby(lobby.Data[JoinCodeKey].Value);
 
-            // Set the details to the transform
-            SetTransformAsClient(a);
-
-            // Join the game room as a client
-            NetworkManager.Singleton.StartClient();
             return lobby;
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Debug.Log($"No lobbies available via quick join");
+            print("No lobbies available via quick join");
             return null;
         }
     }
 
-    // Lobby will automatically shut down when there is inactivity for more than 30 secs
-    private async Task<Lobby> CreateLobby()
+    public async void JoinGame()
     {
-        try
+        print(_joinCodeInput.text);
+        await JoinLobby(_joinCodeInput.text);
+    }
+
+    private async Task JoinLobby(string code)
+    {
+        uiManager.GetComponent<UIManager>().SetGameActive(true);
+
+        JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode: code);
+
+        _transport.SetClientRelayData(alloc.RelayServer.IpV4, (ushort)alloc.RelayServer.Port, alloc.AllocationIdBytes, alloc.Key, alloc.ConnectionData, alloc.HostConnectionData);
+        NetworkManager.Singleton.StartClient();
+    }
+
+    public async void CreateGame()
+    {
+        await CreateLobby();
+    }
+
+    // Lobby will automatically shut down when there is inactivity for more than 30 secs
+    public async Task<Lobby> CreateLobby()
+    {
+        try 
         {
-            const int maxPlayers = 100;
+            uiManager.GetComponent<UIManager>().SetGameActive(true);
 
             // create a relay allocation and generate a join code to share with the lobby
             var a = await RelayService.Instance.CreateAllocationAsync(maxPlayers);
-            var joinCode = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
+            _joinCodeOutput.text = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
 
             // Create a lobby, adding the relay join code to the lobby data
             var options = new CreateLobbyOptions
             {
-                Data = new Dictionary<string, DataObject> { { JoinCodeKey, new DataObject(DataObject.VisibilityOptions.Public, joinCode) } }
+                Data = new Dictionary<string, DataObject> { { JoinCodeKey, new DataObject(DataObject.VisibilityOptions.Public, _joinCodeOutput.text) } }
             };
             var lobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name 1", maxPlayers, options);
 
             // Send a heartbeat every 15 seconds to keep room alive
-            StartCoroutine(HeartbeatLobbyCoroutine(lobby.Id, 15));
+            // StartCoroutine(HeartbeatLobbyCoroutine(lobby.Id, 15));
 
             // Set the game room to use the relay allocation
             _transport.SetHostRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData);
@@ -104,16 +133,12 @@ public class MatchMaking : MonoBehaviour
             // Start the room. I'm doing this immediately, but maybe you wait for the lobby fto fill up
             NetworkManager.Singleton.StartHost();
             return lobby;
-        } catch(Exception e)
+        } 
+        catch(Exception e)
         {
-            Debug.LogFormat("Failed crating a lobby: {e}");
+            Debug.LogFormat("Failed creating a lobby: {0}", e);
             return null;
         }
-    }
-
-    private void SetTransformAsClient(JoinAllocation a)
-    {
-        _transport.SetClientRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData, a.HostConnectionData);
     }
 
     private void OnDestroy()
@@ -132,7 +157,6 @@ public class MatchMaking : MonoBehaviour
             Debug.Log($"Error shutting down lobby: {e}");
         }
     }
-
 
     private static IEnumerator HeartbeatLobbyCoroutine(string lobbyID, float waitTimeSeconds)
     {

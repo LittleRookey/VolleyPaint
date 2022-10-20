@@ -35,7 +35,7 @@ public class RelayManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuCanvas;
 
     private UnityTransport _transport;
-    [SerializeField] private const int MaxPlayers = 5;
+    [SerializeField] private const int MaxPlayers = 11;
 
     private async void Awake()
     {
@@ -62,7 +62,7 @@ public class RelayManager : MonoBehaviour
 
     public async void CreateGame()
     {
-        OnGameStart();
+        SetGameActive(true);
 
         // don't need to know ip addresses
 
@@ -80,7 +80,7 @@ public class RelayManager : MonoBehaviour
 
     public async void JoinGame()
     {
-        OnGameStart();
+        SetGameActive(true);
 
         JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode: _joinCodeInput.text);
 
@@ -88,13 +88,13 @@ public class RelayManager : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-    private void OnGameStart()
+    private void SetGameActive(bool active)
     {
-        // disable main menu
-        mainMenuCanvas.SetActive(false);
-        mainMenuCamera.gameObject.SetActive(false);
+        // disable main menu if active
+        mainMenuCanvas.SetActive(!active);
+        mainMenuCamera.gameObject.SetActive(!active);
 
-        // enable score keeping UI
-        scoreKeepingCanvas.SetActive(true);
+        // enable score keeping UI if active
+        scoreKeepingCanvas.SetActive(active);
     }
 }
