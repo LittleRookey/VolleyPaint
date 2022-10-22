@@ -350,14 +350,15 @@ GameObject:
   - component: {fileID: 8527579545816297114}
   - component: {fileID: 8527579545816297115}
   - component: {fileID: 8527579545816297116}
-  - component: {fileID: 8527579545816297095}
   - component: {fileID: 1620832043581643836}
   - component: {fileID: -4832143378244238688}
-  - component: {fileID: 4732622747919604370}
   - component: {fileID: 4521953449912904797}
   - component: {fileID: 3233990949964637707}
+  - component: {fileID: 358610328}
+  - component: {fileID: 358610339}
+  - component: {fileID: 5015974830339491387}
   m_Layer: 0
-  m_Name: Player
+  m_Name: newPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,13 +437,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8527579545816297118}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d062664ac5c5a444bbf8245935b1d9c5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!54 &8527579545816297116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -459,24 +460,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!143 &8527579545816297095
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8527579545816297118}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1620832043581643836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,7 +491,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8527579545816297118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 039d6fffe66d904449166d827829ae97, type: 3}
   m_Name: 
@@ -516,30 +499,6 @@ MonoBehaviour:
   assignedTeam: 0
   teamOneSpawn: {x: 0, y: 8, z: -24}
   teamTwoSpawn: {x: 0, y: 8, z: 35}
---- !u!114 &4732622747919604370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8527579545816297118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9c039d6f08d1334fb74a5f2918a3f2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 8527579544407879485}
-  lockCursor: 1
-  lookSensitivity: 2.82
-  maxUpRotation: 80
-  maxDownRotation: 80
-  controller: {fileID: 8527579545816297095}
-  walkSpeed: 9.7
-  strafeSpeed: 6.51
-  sprintKey: 304
-  sprintFactor: 1.68
-  jumpHeight: 3.17
-  maxJumps: 1
 --- !u!114 &4521953449912904797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +541,57 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &358610328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527579545816297118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719d1149965e23148a7a767ba9cfb11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivityX: 1
+  mouseSensitivityY: 1
+  walkSpeed: 10
+  canMove: 0
+  groundedMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &358610339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527579545816297118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362bc777868d4274dbcc28a1ae168f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: 266aa23d9d706c94dbb557f3ce577d12, type: 2}
+--- !u!114 &5015974830339491387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527579545816297118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719d1149965e23148a7a767ba9cfb11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivityX: 1
+  mouseSensitivityY: 1
+  walkSpeed: 5
+  canMove: 1
+  groundedMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &1620832043487426591
 PrefabInstance:
   m_ObjectHideFlags: 0
