@@ -18,10 +18,9 @@ public class AbilityHolder : MonoBehaviour
     }
     AbilityState state = AbilityState.ready;
 
-    public UnityAction OnAbilityStart; // event that runs on Ability Start
-    public UnityAction OnAbilityRunning; // event that runs while abiilty is active, runs once if it is immediate ability
-    public UnityAction OnAbilityEnd; // event that runs on Ability Start
-    //public KeyCode key;
+    public UnityAction<GameObject> OnAbilityStart; // event that runs on Ability Start
+    public UnityAction<GameObject> OnAbilityRunning; // event that runs while abiilty is active, runs once if it is immediate ability
+    public UnityAction<GameObject> OnAbilityEnd; // event that runs on Ability Start
 
     public void OnEnable()
     {
@@ -45,7 +44,7 @@ public class AbilityHolder : MonoBehaviour
             case AbilityState.ready:
                 if (Input.GetKeyDown(ability.key) && !isActive)
                 {
-                    OnAbilityStart?.Invoke();
+                    OnAbilityStart?.Invoke(gameObject);
                     ability.UseAbility(gameObject);
                     state = AbilityState.active;
                     activeTime = ability.activeTime;
@@ -57,27 +56,15 @@ public class AbilityHolder : MonoBehaviour
                 if (activeTime > 0)
                 {
                     activeTime -= Time.deltaTime;
-                    OnAbilityRunning?.Invoke();
-                    if (Input.GetKeyUp(ability.key)) // when key is unpressed while active
+                    OnAbilityRunning?.Invoke(gameObject);
+                    if (Input.GetKeyUp(ability.key)) // ends active time
                     {
-                        Debug.Log("Key up");
-                        activeTime = 0f;
-                        isActive = false;
-                        ability.BeginCooldown(gameObject);
-                        state = AbilityState.cooldown;
-                        cooldownTime = ability.coolDownTime;
-                        OnAbilityEnd?.Invoke();
+                        TurnSkillOff();
                     }
                 }
                 else
                 {
-                    Debug.Log("ActiveTime <= 0");
-                    activeTime = 0f;
-                    isActive = false;
-                    ability.BeginCooldown(gameObject);
-                    state = AbilityState.cooldown;
-                    cooldownTime = ability.coolDownTime;
-                    OnAbilityEnd?.Invoke();
+                    TurnSkillOff();
                 }
                 break;
             case AbilityState.cooldown:
@@ -90,5 +77,15 @@ public class AbilityHolder : MonoBehaviour
                 }
                 break;
         }
+    }
+    // Disactivate the skill and run cooldown and set active time to 0
+    private void TurnSkillOff()
+    {
+        activeTime = 0f;
+        isActive = false;
+        ability.BeginCooldown(gameObject);
+        state = AbilityState.cooldown;
+        cooldownTime = ability.coolDownTime;
+        OnAbilityEnd?.Invoke(gameObject);
     }
 }

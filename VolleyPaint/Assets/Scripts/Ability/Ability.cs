@@ -20,11 +20,13 @@ public class Ability : ScriptableObject
     public float coolDownTime; // cooldown time for ability
     public float activeTime; // time to start cooldown after ability is activated
     [TextArea]
-    public string description;
-    public eAbilityType abilityType;
-    public KeyCode key;
-    [SerializeField] protected bool cantMoveWhileUsingAbility;
-    protected bool isUsingAbility;
+    public string description; // description of the ability
+    public eAbilityType abilityType; // type of ability 
+    public KeyCode key; // ability use key 
+
+    [SerializeField] 
+    protected bool cantMoveWhileUsingAbility; // allows player to move while using ability
+    protected bool isUsingAbility; // when player is holding on a key(charge?), 
 
     public Ability Clone() 
     {
@@ -51,7 +53,7 @@ public class Ability : ScriptableObject
     }
 
     /// <summary>
-    /// When Ability ends
+    /// When Ability ends, runs do something
     /// </summary>
     /// /// <param name="parent">the gameObject Ability Holder is attached to</param>
     public virtual void BeginCooldown(GameObject parent) 
@@ -64,7 +66,11 @@ public class Ability : ScriptableObject
         }
     }
 
-    public virtual void OnAbilityStart() 
+    /// <summary>
+    /// callback event ran when ability starts
+    /// </summary>
+    /// /// <param name="parent">the gameObject Ability Holder is attached to</param>
+    public virtual void OnAbilityStart(GameObject parent) 
     { 
         if (showLog)
         {
@@ -72,7 +78,11 @@ public class Ability : ScriptableObject
         }
     }
 
-    public virtual void OnAbilityEnd() 
+    /// <summary>
+    /// callback event ran when ability ended
+    /// </summary>
+    /// /// <param name="parent">the gameObject Ability Holder is attached to</param>
+    public virtual void OnAbilityEnd(GameObject parent) 
     {
         if (showLog)
         {
@@ -80,7 +90,11 @@ public class Ability : ScriptableObject
         }
     }
 
-    public virtual void OnAbilityRunning() 
+    /// <summary>
+    /// callback event ran when player is holding a key
+    /// </summary>
+    /// /// <param name="parent">the gameObject Ability Holder is attached to</param>
+    public virtual void OnAbilityRunning(GameObject parent) 
     {
         if (showLog)
         {

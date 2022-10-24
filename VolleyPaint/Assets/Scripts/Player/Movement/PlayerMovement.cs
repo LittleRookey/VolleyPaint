@@ -97,7 +97,8 @@ public class PlayerMovement : NetworkBehaviour
 
 	void FixedUpdate()
 	{
-		rigidbodyR.MovePosition(rigidbodyR.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+		if (canMove)
+			rigidbodyR.MovePosition(rigidbodyR.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
 	}
 
 	void UnlockMouse()

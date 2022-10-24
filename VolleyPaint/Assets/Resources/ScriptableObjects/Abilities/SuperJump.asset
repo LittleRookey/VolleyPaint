@@ -18,9 +18,10 @@ MonoBehaviour:
   activeTime: 3
   description: 
   abilityType: 1
-  key: 306
+  key: 304
   cantMoveWhileUsingAbility: 0
   maxEnergy: 750
-  currentEnergy: 751.0689
+  currentEnergy: 0
   energyGainSpeed: 300
   reducedHeight: 0.5
+  reduceSpeed: 0.4

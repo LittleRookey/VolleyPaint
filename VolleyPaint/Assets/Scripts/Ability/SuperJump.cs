@@ -9,8 +9,11 @@ public class SuperJump : Ability
     [SerializeField] private float currentEnergy = 0f;
     [SerializeField] private float energyGainSpeed = 0.1f;
     public float reducedHeight;
-
     float originHeight;
+
+    [Range(0.01f, 1.0f)]
+    public float reduceSpeed = 0.4f;
+    float originSpeed;
 
     CapsuleCollider collider;
     Rigidbody rb;
@@ -24,7 +27,7 @@ public class SuperJump : Ability
         rb = parent.GetComponent<Rigidbody>();
         originHeight = collider.height;
         Debug.Log("Run Ability");
-        currentEnergy = 0f;
+        
         collider.height = reducedHeight;
         //StartCharge();
     }
@@ -36,19 +39,27 @@ public class SuperJump : Ability
         // run ability 
         collider.height = originHeight;
         rb.AddForce(Vector3.up * currentEnergy);
-        //currentEnergy = 0f;
     }
 
-    public override void OnAbilityRunning()
+    public override void OnAbilityStart(GameObject parent)
     {
-        base.OnAbilityRunning();
+        base.OnAbilityStart(parent);
+        PlayerMovement playerMovement = parent.GetComponent<PlayerMovement>();
+        originSpeed = playerMovement.walkSpeed;
+        playerMovement.walkSpeed *= reduceSpeed;
+    }
+    public override void OnAbilityRunning(GameObject parent)
+    {
+        base.OnAbilityRunning(parent);
         StartCharge();
     }
 
-    //public override void OnAbilityEnd()
-    //{
-    //    currentEnergy = 0f;
-    //}
+    public override void OnAbilityEnd(GameObject parent)
+    {
+        base.OnAbilityEnd(parent);
+        currentEnergy = 0f;
+        parent.GetComponent<PlayerMovement>().walkSpeed = originSpeed;
+    }
 
     void StartCharge()
     {
