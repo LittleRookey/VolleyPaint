@@ -82,7 +82,7 @@ public class PlayerMovement : NetworkBehaviour
 		}
 
         /* Lock/unlock mouse on click */
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             if (!cursorVisible)
             {

@@ -29,7 +29,6 @@ public class SuperJump : Ability
         Debug.Log("Run Ability");
         
         collider.height = reducedHeight;
-        //StartCharge();
     }
 
     // On key up

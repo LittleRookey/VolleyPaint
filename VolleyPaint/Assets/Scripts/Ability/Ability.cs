@@ -101,4 +101,9 @@ public class Ability : ScriptableObject
             Debug.Log(name + " Ability Running");
         }
     }
+
+    protected bool IsOnCooldown()
+    {
+        return coolDownTime > 0f;
+    }
 }

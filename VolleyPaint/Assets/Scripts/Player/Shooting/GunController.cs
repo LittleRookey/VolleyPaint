@@ -37,7 +37,7 @@ public class GunController : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

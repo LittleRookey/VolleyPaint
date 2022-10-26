@@ -15,8 +15,6 @@ public class SlideAbility : Ability
     public override void UseAbility(GameObject parent)
     {
         base.UseAbility(parent); // sets isUsingAbility to true
-        // initialize
-        Debug.Log(" Ability used");
         collider = parent.GetComponent<CapsuleCollider>();
         rb = parent.GetComponent<Rigidbody>();
         originHeight = collider.height;
@@ -33,5 +31,4 @@ public class SlideAbility : Ability
         base.BeginCooldown(parent); // sets isUsingAbility to false
         collider.height = originHeight;
     }
-
 }
