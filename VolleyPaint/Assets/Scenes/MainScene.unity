@@ -7920,12 +7920,12 @@ PrefabInstance:
     - target: {fileID: 3562273621088329095, guid: 6ab9ec776c00feb44ad3e214b05f448f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.89
+      value: 8.89
       objectReference: {fileID: 0}
     - target: {fileID: 3562273621088329095, guid: 6ab9ec776c00feb44ad3e214b05f448f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.74
+      value: -13.93
       objectReference: {fileID: 0}
     - target: {fileID: 3562273621088329095, guid: 6ab9ec776c00feb44ad3e214b05f448f,
         type: 3}
@@ -7969,6 +7969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562273621088329099, guid: 6ab9ec776c00feb44ad3e214b05f448f,
         type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562273621088329099, guid: 6ab9ec776c00feb44ad3e214b05f448f,
+        type: 3}
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
@@ -7976,6 +7981,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065279946228661493, guid: 6ab9ec776c00feb44ad3e214b05f448f,
+        type: 3}
+      propertyPath: gravity
+      value: -24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab9ec776c00feb44ad3e214b05f448f, type: 3}

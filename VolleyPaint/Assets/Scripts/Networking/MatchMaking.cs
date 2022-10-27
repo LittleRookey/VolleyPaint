@@ -39,7 +39,7 @@ public class MatchMaking : MonoBehaviour
         // Every unity services need authentication
         await Authenticate();
 
-        // enables main menu, so we can keep disabled until it connects to Unity
+        // enables main menu, so we can keep the game canvas disabled until it connects to Unity
         uiManager.GetComponent<UIManager>().SetGameActive(false);
     }    
     
