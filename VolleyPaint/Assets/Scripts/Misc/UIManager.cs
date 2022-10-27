@@ -9,8 +9,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text teamTwoText;
 
     [SerializeField] private Camera mainMenuCamera;
+    [SerializeField] private GameObject flyCamera;
+
     [SerializeField] private GameObject scoreKeepingCanvas;
     [SerializeField] private GameObject mainMenuCanvas;
+
+    private bool spectate;
 
     private bool gameStarted;
 
@@ -28,6 +32,12 @@ public class UIManager : MonoBehaviour
             teamOneText.text = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamOneScore().ToString();
             teamTwoText.text = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamTwoScore().ToString();
         }
+
+        // disable player in spectate mode
+        if (spectate && Camera.main != null)
+        {
+            Camera.main.transform.parent.gameObject.SetActive(!gameStarted);
+        }
     }
 
     public void SetGameActive(bool active)
@@ -40,5 +50,16 @@ public class UIManager : MonoBehaviour
 
         // enable score keeping UI if active
         scoreKeepingCanvas.SetActive(active);
+
+        if (spectate)
+        {
+            flyCamera.SetActive(true);
+        }
+
+       
+    }
+    public void SetSpectateActive(bool active)
+    {
+        spectate = active;
     }
 }
