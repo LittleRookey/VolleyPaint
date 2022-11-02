@@ -4,8 +4,8 @@ using UnityEngine;
 using Blobcreate.Universal;
 using Blobcreate.ProjectileToolkit;
 
-[CreateAssetMenu(menuName = "Litkey/Ability/Projectile/ManageBall")]
-public class ProjectileLaunch : Ability
+[CreateAssetMenu(menuName = "Litkey/Ability/Projectile/SlingShot")]
+public class SlingShot : Ability
 {
 	[Header("Specific Settings")]
 	//public Transform launchPoint;
