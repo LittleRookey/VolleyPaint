@@ -20,30 +20,15 @@ public class SuperJump : Ability
 
     // first crouch and charge energy, can move slowly
     // on key up, super jump
-    public override void UseAbility(GameObject parent)
-    {
-        base.UseAbility(parent);
-        collider = parent.GetComponent<CapsuleCollider>();
-        rb = parent.GetComponent<Rigidbody>();
-        originHeight = collider.height;
-        Debug.Log("Run Ability");
-        
-        collider.height = reducedHeight;
-    }
-
-    // On key up
-    public override void BeginCooldown(GameObject parent)
-    {
-        base.BeginCooldown(parent);
-        // run ability 
-        collider.height = originHeight;
-        rb.AddForce(Vector3.up * currentEnergy);
-    }
-
     public override void OnAbilityStart(GameObject parent)
     {
         base.OnAbilityStart(parent);
         PlayerMovement playerMovement = parent.GetComponent<PlayerMovement>();
+        collider = parent.GetComponent<CapsuleCollider>();
+        rb = parent.GetComponent<Rigidbody>();
+
+        originHeight = collider.height;
+        collider.height = reducedHeight;
         originSpeed = playerMovement.walkSpeed;
         playerMovement.walkSpeed *= reduceSpeed;
     }
@@ -56,6 +41,8 @@ public class SuperJump : Ability
     public override void OnAbilityEnd(GameObject parent)
     {
         base.OnAbilityEnd(parent);
+        collider.height = originHeight;
+        rb.AddForce(Vector3.up * currentEnergy);
         currentEnergy = 0f;
         parent.GetComponent<PlayerMovement>().walkSpeed = originSpeed;
     }

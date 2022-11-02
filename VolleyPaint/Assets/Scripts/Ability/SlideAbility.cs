@@ -12,23 +12,22 @@ public class SlideAbility : Ability
 
     CapsuleCollider collider;
     Rigidbody rb;
-    public override void UseAbility(GameObject parent)
+
+    public override void OnAbilityStart(GameObject parent)
     {
-        base.UseAbility(parent); // sets isUsingAbility to true
+        base.OnAbilityStart(parent);
         collider = parent.GetComponent<CapsuleCollider>();
         rb = parent.GetComponent<Rigidbody>();
         originHeight = collider.height;
 
-
         // use ability
         collider.height = reducedHeight;
         rb.AddForce(parent.transform.forward * slideForce, ForceMode.VelocityChange);
-
     }
 
-    public override void BeginCooldown(GameObject parent)
+    public override void OnAbilityEnd(GameObject parent)
     {
-        base.BeginCooldown(parent); // sets isUsingAbility to false
+        base.OnAbilityEnd(parent);
         collider.height = originHeight;
     }
 }
