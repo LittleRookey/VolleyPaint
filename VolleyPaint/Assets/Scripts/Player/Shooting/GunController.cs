@@ -13,6 +13,9 @@ public class GunController : NetworkBehaviour
     Vector3 originGunPos = new Vector3(0.665f, -0.26f, 1.435f);
     Vector3 holsterGunPos = new Vector3(0.665f, -2f, 1.435f);
 
+    [Header("Debug")]
+    public bool isTestingWithoutNetwork;
+
     private void Awake()
     {
         
@@ -37,7 +40,8 @@ public class GunController : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner) return;
+        if (!isTestingWithoutNetwork)
+            if (!IsOwner) return;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
