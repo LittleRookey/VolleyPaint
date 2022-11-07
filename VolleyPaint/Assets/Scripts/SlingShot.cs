@@ -4,8 +4,8 @@ using UnityEngine;
 using Blobcreate.Universal;
 using Blobcreate.ProjectileToolkit;
 
-[CreateAssetMenu(menuName = "Litkey/Ability/Projectile/ManageBall")]
-public class ProjectileLaunch : Ability
+[CreateAssetMenu(menuName = "Litkey/Ability/Projectile/SlingShot")]
+public class SlingShot : Ability
 {
 	[Header("Specific Settings")]
 	//public Transform launchPoint;
@@ -29,16 +29,6 @@ public class ProjectileLaunch : Ability
 	// Player shoots some kind of projectile or ray
 	// if it hits the ball, stop the ball for a while, player gains access to shoot the ball in the direction player is looking at
 	// and shoot the ball
-    public override void UseAbility(GameObject parent)
-    {
-        base.UseAbility(parent);
-		// Shoot projectile to the ball
-		//var b = Instantiate(bulletPrefab, launchPoint.position, launchPoint.rotation);
-		//Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 300f, groundMask);
-		rb.velocity = Vector3.zero;
-		rb.isKinematic = true;
-	}
-
     public override void OnAbilityStart(GameObject parent)
     {
         base.OnAbilityStart(parent);
@@ -48,6 +38,8 @@ public class ProjectileLaunch : Ability
 		{
 			rb = ball.GetComponent<Rigidbody>();
 			ball.GetComponent<ProjectileBehaviour>().faceDirection = faceDirection;
+			rb.velocity = Vector3.zero;
+			rb.isKinematic = true;
 		}
 		currentA = smallA;
 		OnFireButtonDown();

@@ -20,6 +20,7 @@ public class BallBehaviour : ProjectileBehaviour
 
     }
 
+    // handles collision event when the ball collides with some object
     protected override void Explosion(Collision collision)
     {
         var c = Physics.OverlapSphereNonAlloc(transform.position, radius, result, scanMask);

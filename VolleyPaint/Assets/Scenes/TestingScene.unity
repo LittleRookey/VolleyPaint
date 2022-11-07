@@ -2360,10 +2360,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1620832043581643836, guid: df7a1696aae941040bf41ff485dd26c4,
+        type: 3}
+      propertyPath: isTestingWithoutNetwork
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4521953449912904797, guid: df7a1696aae941040bf41ff485dd26c4,
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1418265263
+      objectReference: {fileID: 0}
+    - target: {fileID: 5015974830339491387, guid: df7a1696aae941040bf41ff485dd26c4,
+        type: 3}
+      propertyPath: jumpForce
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724618796283051061, guid: df7a1696aae941040bf41ff485dd26c4,
+        type: 3}
+      propertyPath: isTestingWithoutNetwork
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
         type: 3}

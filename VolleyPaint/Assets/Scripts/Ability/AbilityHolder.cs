@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
 using UnityEngine.Events;
 
 public class AbilityHolder : MonoBehaviour
@@ -39,25 +38,25 @@ public class AbilityHolder : MonoBehaviour
     void Update()
     {
         // takes care of cooldown of the ability
-        switch(state)
+        switch (state)
         {
             case AbilityState.ready:
                 if (Input.GetKeyDown(ability.key) && !isActive)
                 {
                     OnAbilityStart?.Invoke(gameObject);
-                    ability.UseAbility(gameObject);
                     state = AbilityState.active;
                     activeTime = ability.activeTime;
                     isActive = true;
 
-                } 
+                }
                 break;
             case AbilityState.active:
                 if (activeTime > 0)
                 {
                     activeTime -= Time.deltaTime;
+
                     OnAbilityRunning?.Invoke(gameObject);
-                    if (Input.GetKeyUp(ability.key)) // ends active time
+                    if (Input.GetKeyUp(ability.key) && !ability.Instantaneous) // ends active time when key is unpressed and ability is not instantanous 
                     {
                         TurnSkillOff();
                     }
@@ -71,7 +70,8 @@ public class AbilityHolder : MonoBehaviour
                 if (cooldownTime > 0)
                 {
                     cooldownTime -= Time.deltaTime;
-                } else
+                }
+                else
                 {
                     state = AbilityState.ready;
                 }
@@ -83,7 +83,6 @@ public class AbilityHolder : MonoBehaviour
     {
         activeTime = 0f;
         isActive = false;
-        ability.BeginCooldown(gameObject);
         state = AbilityState.cooldown;
         cooldownTime = ability.coolDownTime;
         OnAbilityEnd?.Invoke(gameObject);

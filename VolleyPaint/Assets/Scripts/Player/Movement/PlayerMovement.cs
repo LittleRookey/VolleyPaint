@@ -10,6 +10,8 @@ public class PlayerMovement : NetworkBehaviour
 	public float mouseSensitivityY = 1.0f;
 
 	public float walkSpeed = 10.0f;
+	public float jumpForce = 15f;
+
 	public bool canMove;
 
 	Vector3 moveAmount;
@@ -20,7 +22,6 @@ public class PlayerMovement : NetworkBehaviour
 
 	Rigidbody rigidbodyR;
 
-	float jumpForce = 150.0f;
 	bool grounded;
 	public LayerMask groundedMask;
 	bool cursorVisible;

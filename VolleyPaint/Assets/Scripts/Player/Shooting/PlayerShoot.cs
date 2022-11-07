@@ -42,6 +42,8 @@ public class PlayerShoot : NetworkBehaviour
     private int bulletsLeft;
     private int jumpBulletsLeft;
 
+    [Header("Debug")]
+    public bool isTestingWithoutNetwork;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +60,8 @@ public class PlayerShoot : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!IsOwner) return;
+        if (!isTestingWithoutNetwork)
+            if (!IsOwner) return;
 
         fireRateCountDown += Time.deltaTime;
 
