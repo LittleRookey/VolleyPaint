@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 
 public enum Team
 {
@@ -10,6 +11,8 @@ public enum Team
 
 public class GameManagement : NetworkBehaviour
 {
+    [SerializeField] private TMP_Text roundOverText;
+
     private NetworkVariable<int> teamOneScore;
     private NetworkVariable<int> teamTwoScore;
 
@@ -20,6 +23,8 @@ public class GameManagement : NetworkBehaviour
     private float currentRoundCooldown;
 
     private bool roundOver;
+
+    private Transform player;
 
 
     // Start is called before the first frame update
@@ -43,8 +48,15 @@ public class GameManagement : NetworkBehaviour
         {
             currentRoundCooldown += Time.deltaTime;
 
+            // round restarts after time limit
             if (currentRoundCooldown >= roundCooldownDuration)
             {
+                // allows players to shoot again
+                player.GetComponent<PlayerShoot>().enabled = true;
+
+                // hide round won/lost text
+                roundOverText.gameObject.SetActive(false);
+
                 currentRoundCooldown = 0.0f;
                 roundOver = false;
 
@@ -84,6 +96,21 @@ public class GameManagement : NetworkBehaviour
             servingTeam = winningTeam;
             mostRecentlyShootingTeam = Team.none;
             roundOver = true;
+
+            // displays round won/lost text
+            roundOverText.gameObject.SetActive(true);
+            player = Camera.main.transform.parent;
+            if (player.GetComponent<TeamAssignment>().assignedTeam == winningTeam) // finds main camera to find team of player its assigned to
+            {
+                roundOverText.text = "ROUND WON";
+            }
+            else
+            {
+                roundOverText.text = "ROUND LOST";
+            }
+
+            // prevents players from shooting
+            player.GetComponent<PlayerShoot>().enabled = false;
         }
     }
 
