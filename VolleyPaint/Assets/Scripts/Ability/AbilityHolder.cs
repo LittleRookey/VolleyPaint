@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Netcode;
 
-public class AbilityHolder : MonoBehaviour
+public class AbilityHolder : NetworkBehaviour
 {
+    public bool isNetworkAbility; // whether the ability should be run on other clients(or servers) or not
     public Ability ability;
     float cooldownTime;
     float activeTime;
@@ -37,29 +39,21 @@ public class AbilityHolder : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
         // takes care of cooldown of the ability
         switch (state)
         {
             case AbilityState.ready:
                 if (Input.GetKeyDown(ability.key) && !isActive)
                 {
-                    OnAbilityStart?.Invoke(gameObject);
-                    state = AbilityState.active;
-                    activeTime = ability.activeTime;
-                    isActive = true;
+                    StartSkill();
 
                 }
                 break;
             case AbilityState.active:
                 if (activeTime > 0)
                 {
-                    activeTime -= Time.deltaTime;
-
-                    OnAbilityRunning?.Invoke(gameObject);
-                    if (Input.GetKeyUp(ability.key) && !ability.Instantaneous) // ends active time when key is unpressed and ability is not instantanous 
-                    {
-                        TurnSkillOff();
-                    }
+                    RunningSkill();
                 }
                 else
                 {
@@ -78,9 +72,89 @@ public class AbilityHolder : MonoBehaviour
                 break;
         }
     }
+
+    private void StartSkill()
+    { 
+        OnAbilityStart?.Invoke(gameObject);
+        state = AbilityState.active;
+        activeTime = ability.activeTime;
+        isActive = true;
+        if (isNetworkAbility)
+        {
+            StartSkillServerRPC();
+        }
+    }
+
+    [ServerRpc]
+    private void StartSkillServerRPC()
+    {
+        StartSkillClientRPC();
+    }
+
+    [ClientRpc]
+    private void StartSkillClientRPC()
+    {
+        if (IsOwner) return;
+        OnAbilityStart?.Invoke(gameObject);
+        state = AbilityState.active;
+        activeTime = ability.activeTime;
+        isActive = true;
+    }
+
+    private void RunningSkill()
+    {
+        activeTime -= Time.deltaTime;
+
+        OnAbilityRunning?.Invoke(gameObject);
+        if (Input.GetKeyUp(ability.key) && !ability.Instantaneous) // ends active time when key is unpressed and ability is not instantanous 
+        {
+            TurnSkillOff();
+        }
+    }
+
+    [ServerRpc]
+    private void RunningSkillServerRPC()
+    {
+        RunningSkillClientRPC();
+    }
+
+
+    [ClientRpc]
+    private void RunningSkillClientRPC()
+    {
+        if (IsOwner) return;
+        activeTime -= Time.deltaTime;
+
+        OnAbilityRunning?.Invoke(gameObject);
+        if (Input.GetKeyUp(ability.key) && !ability.Instantaneous) // ends active time when key is unpressed and ability is not instantanous 
+        {
+            TurnSkillOff();
+        }
+    }
+
     // Disactivate the skill and run cooldown and set active time to 0
     private void TurnSkillOff()
     {
+        activeTime = 0f;
+        isActive = false;
+        state = AbilityState.cooldown;
+        cooldownTime = ability.coolDownTime;
+        OnAbilityEnd?.Invoke(gameObject);
+        if (isNetworkAbility)
+        {
+            TurnSkillOffServerRPC();
+        }
+    }
+
+    [ServerRpc]
+    private void TurnSkillOffServerRPC()
+    {
+        TurnSkillOffClientRPC();
+    }
+    [ClientRpc]
+    private void TurnSkillOffClientRPC()
+    {
+        if (IsOwner) return;
         activeTime = 0f;
         isActive = false;
         state = AbilityState.cooldown;

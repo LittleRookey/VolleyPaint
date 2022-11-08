@@ -14,11 +14,10 @@ namespace Blobcreate.ProjectileToolkit
 		public LineRenderer Line { get => line; set => line = value; }
 		public Vector3[] Positions => positions;
 		public int PositionCount => validCount;
-
-		/// <summary>
-		/// The gravity that used to simulate trajectories. Currently does not support custom gravity direction.
-		/// </summary>
-		public Vector3 Gravity
+        /// <summary>
+        /// The gravity that used to simulate trajectories. Currently does not support custom gravity direction.
+        /// </summary>
+        public Vector3 Gravity
 		{
 			get => gravity;
 			set

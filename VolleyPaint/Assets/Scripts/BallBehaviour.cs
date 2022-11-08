@@ -37,4 +37,11 @@ public class BallBehaviour : ProjectileBehaviour
         base.Explosion(collision);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("AbilityBox"))
+        {
+            Debug.Log("Trigger name: " + other.gameObject.name);
+        }
+    }
 }
