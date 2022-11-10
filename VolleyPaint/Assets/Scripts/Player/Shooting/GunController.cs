@@ -16,8 +16,6 @@ public class GunController : NetworkBehaviour
     [Header("Debug")]
     public bool isTestingWithoutNetwork;
 
-    private bool isReloading;
-
     private void Awake()
     {
         
@@ -38,7 +36,6 @@ public class GunController : NetworkBehaviour
     void Start()
     {
         guns[activeGunIndex].gameObject.SetActive(true);
-        isReloading = false;
     }
 
     void Update()
@@ -46,12 +43,12 @@ public class GunController : NetworkBehaviour
         if (!isTestingWithoutNetwork)
             if (!IsOwner) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangeGunMode(eShootType.Normal);
             ChangeGunModeServerRPC(eShootType.Normal);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ChangeGunMode(eShootType.Jump);
             ChangeGunModeServerRPC(eShootType.Jump);
@@ -75,23 +72,15 @@ public class GunController : NetworkBehaviour
     {
         // If it's in the first half of the cooldown, bring the gun towards the player
         // Otherwise, bring it away from the player
-        if (lapsedTime >= cooldownTime)
-        {
-            isReloading = false;
-        }
-        else
-        {
-            isReloading = true;
-        }
-
-        if (lapsedTime <= cooldownTime / 2)
+        // To be fixed
+        /*if (lapsedTime <= cooldownTime / 2)
         {
             guns[activeGunIndex].transform.localPosition += Vector3.back * 0.001f * gunChangeSpeed;
         }
         else if (lapsedTime > cooldownTime / 2)
         {
             guns[activeGunIndex].transform.localPosition += Vector3.forward * 0.001f * gunChangeSpeed;
-        }
+        }*/
     }
 
     IEnumerator GunChange(GameObject go)
