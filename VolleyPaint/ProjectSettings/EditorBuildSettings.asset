@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestingScene.unity
     guid: 1977222dd83ae3b4599ef3e1d0fd71e4
+  - enabled: 1
+    path: Assets/Scenes/Ammo tests.unity
+    guid: d63f697652143c744b60068e664a17cb
   m_configObjects: {}

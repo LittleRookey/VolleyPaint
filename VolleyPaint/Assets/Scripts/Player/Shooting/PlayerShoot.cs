@@ -35,12 +35,15 @@ public class PlayerShoot : NetworkBehaviour
     private Transform ballTransform;
     private Transform camTransform;
 
-    // Ammo limits
+    [Header("Ammo Limit")]
+    [SerializeField] private float reloadCooldown;
     [SerializeField] private int bulletLimit;
-    [SerializeField] private int jumpBulletLimit;
 
+    private GunController gunController;
+    private bool isReloading;
+    private bool reloadSoundPlayed;
+    private float reloadTimeElapsed;
     private int bulletsLeft;
-    private int jumpBulletsLeft;
 
     [Header("Debug")]
     public bool isTestingWithoutNetwork;
@@ -52,8 +55,11 @@ public class PlayerShoot : NetworkBehaviour
         camTransform = Camera.main.transform;
         bulletType = eBulletType.Hitscan;
 
+        gunController = GameObject.Find("GunHandler").GetComponent<GunController>();
+        isReloading = false;
+        reloadSoundPlayed = false;
+        reloadTimeElapsed = 0.0f;
         bulletsLeft = bulletLimit;
-        jumpBulletsLeft = jumpBulletLimit;
     }
 
 
@@ -65,7 +71,30 @@ public class PlayerShoot : NetworkBehaviour
 
         fireRateCountDown += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && fireRateCountDown >= fireRate)
+        if (isReloading)
+        {
+            reloadTimeElapsed += Time.deltaTime;
+
+            // Trigger for when to play reload sound
+            if (reloadTimeElapsed >= reloadCooldown / 2 && !reloadSoundPlayed)
+            {
+                reloadSoundPlayed = true;
+                MasterAudio.PlaySound3DAtVector3("Reload", transform.position);
+            }
+
+            // Manage animations for the gun
+            gunController.ReloadGunAnimation(reloadTimeElapsed, reloadCooldown);
+
+            // End reloading
+            if (reloadTimeElapsed >= reloadCooldown)
+            {
+                isReloading = false;
+                reloadSoundPlayed = false;
+                reloadTimeElapsed = 0.0f;
+                bulletsLeft = bulletLimit;         
+            }
+        }
+        if (!isReloading && Input.GetButton("Fire1") && fireRateCountDown >= fireRate)
         {
             fireRateCountDown = 0f;
 
@@ -81,6 +110,17 @@ public class PlayerShoot : NetworkBehaviour
 
                 InitiateShootBall(ballPos, camDir);
             }
+
+            bulletsLeft -= 1;
+
+            if (bulletsLeft == 0)
+            {
+                isReloading = true;
+            }
+        }
+        if (!isReloading && Input.GetKey(KeyCode.R) && bulletsLeft != bulletLimit)
+        {
+            isReloading = true;
         }
     }
     
@@ -188,6 +228,5 @@ public class PlayerShoot : NetworkBehaviour
     public void ReplenishAmmoClientRpc()
     {
         bulletsLeft = bulletLimit;
-        jumpBulletsLeft = jumpBulletLimit;
     }
 }

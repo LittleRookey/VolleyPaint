@@ -484,8 +484,8 @@ MonoBehaviour:
     type: 3}
   ballSpeed: 900
   ballJumpSpeed: 900
-  bulletLimit: 0
-  jumpBulletLimit: 0
+  reloadCooldown: 3
+  bulletLimit: 5
   isTestingWithoutNetwork: 0
 --- !u!114 &-4832143378244238688
 MonoBehaviour:
