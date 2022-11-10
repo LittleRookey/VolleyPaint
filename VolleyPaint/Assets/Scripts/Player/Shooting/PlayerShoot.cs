@@ -39,7 +39,7 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField] private float reloadCooldown;
     [SerializeField] private int bulletLimit;
 
-    private GunController gunController;
+    [SerializeField] private GunController gunController;
     private bool isReloading;
     private bool reloadSoundPlayed;
     private float reloadTimeElapsed;
@@ -55,7 +55,6 @@ public class PlayerShoot : NetworkBehaviour
         camTransform = Camera.main.transform;
         bulletType = eBulletType.Hitscan;
 
-        gunController = GameObject.Find("GunHandler").GetComponent<GunController>();
         isReloading = false;
         reloadSoundPlayed = false;
         reloadTimeElapsed = 0.0f;

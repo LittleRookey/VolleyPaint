@@ -482,10 +482,11 @@ MonoBehaviour:
   shootType: 0
   normal_hitImpact: {fileID: 1061481793025988, guid: 5752233f067735c45bf0f75f8afd4a3f,
     type: 3}
-  ballSpeed: 900
+  ballSpeed: 1500
   ballJumpSpeed: 900
-  reloadCooldown: 3
-  bulletLimit: 5
+  reloadCooldown: 2
+  bulletLimit: 3
+  gunController: {fileID: 7724618796283051061}
   isTestingWithoutNetwork: 0
 --- !u!114 &-4832143378244238688
 MonoBehaviour:
