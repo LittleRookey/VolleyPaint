@@ -49,6 +49,7 @@ MonoBehaviour:
   guns: []
   gunChangeSpeed: 30
   activeGunIndex: 0
+  isTestingWithoutNetwork: 0
 --- !u!1 &8527579544407879472
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +502,7 @@ MonoBehaviour:
   ballJumpSpeed: 1200
   bulletLimit: 0
   jumpBulletLimit: 0
+  isTestingWithoutNetwork: 0
 --- !u!114 &-4832143378244238688
 MonoBehaviour:
   m_ObjectHideFlags: 0
