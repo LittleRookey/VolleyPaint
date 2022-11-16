@@ -72,10 +72,6 @@ public class GameManagement : NetworkBehaviour
         if (team != mostRecentlyShootingTeam)
         {
             mostRecentlyShootingTeam = team;
-            foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-            {
-                player.GetComponent<PlayerShoot>().ReplenishAmmoClientRpc(); // Currently a stub, will implement after scorekeeping done
-            }
         }
     }
 

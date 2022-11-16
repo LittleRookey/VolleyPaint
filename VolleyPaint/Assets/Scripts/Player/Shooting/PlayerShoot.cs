@@ -93,7 +93,7 @@ public class PlayerShoot : NetworkBehaviour
                 bulletsLeft = bulletLimit;         
             }
         }
-        if (!isReloading && Input.GetButton("Fire1") && fireRateCountDown >= fireRate)
+        else if (Input.GetButton("Fire1") && fireRateCountDown >= fireRate)
         {
             fireRateCountDown = 0f;
 
@@ -117,7 +117,7 @@ public class PlayerShoot : NetworkBehaviour
                 isReloading = true;
             }
         }
-        if (!isReloading && Input.GetKey(KeyCode.R) && bulletsLeft != bulletLimit)
+        else if (Input.GetKey(KeyCode.R) && bulletsLeft != bulletLimit)
         {
             isReloading = true;
         }
@@ -220,12 +220,5 @@ public class PlayerShoot : NetworkBehaviour
         float reticleToBall = Vector3.Distance(ballPos, cameraPos + camVector);
 
         return reticleToBall <= ballTransform.localScale.x / 2;
-    }
-
-    // Replenishes player ammo
-    [ClientRpc]
-    public void ReplenishAmmoClientRpc()
-    {
-        bulletsLeft = bulletLimit;
     }
 }
