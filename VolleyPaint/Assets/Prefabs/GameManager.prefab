@@ -45,14 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94fb14628b2716e448e38d6ced7e003b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamOneScoreText: {fileID: 0}
-  teamTwoScoreText: {fileID: 0}
-  teamOneBallSpawn: {fileID: 0}
-  teamTwoBallSpawn: {fileID: 0}
-  mostRecentlyShootingTeam: 0
-  servingTeam: 0
-  roundCooldownDuration: 0
-  currentRoundCooldown: 0
+  roundOverText: {fileID: 0}
+  roundCooldownDuration: 2
 --- !u!114 &2448618279314220025
 MonoBehaviour:
   m_ObjectHideFlags: 0
