@@ -576,29 +576,6 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
-<<<<<<< HEAD
-=======
---- !u!114 &358610328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8527579545816297118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719d1149965e23148a7a767ba9cfb11d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivityX: 1
-  mouseSensitivityY: 1
-  walkSpeed: 10
-  jumpForce: 15
-  canMove: 0
-  groundedMask:
-    serializedVersion: 2
-    m_Bits: 64
->>>>>>> main
 --- !u!114 &358610339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,8 +588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362bc777868d4274dbcc28a1ae168f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNetworkAbility: 1
   ability: {fileID: 11400000, guid: 266aa23d9d706c94dbb557f3ce577d12, type: 2}
+  isLocked: 0
+  abilityIcon: {fileID: 0}
 --- !u!114 &5015974830339491387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,12 +605,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivityX: 1
   mouseSensitivityY: 1
-  walkSpeed: 5
-<<<<<<< HEAD
+  walkSpeed: 10
   jumpForce: 300
-=======
-  jumpForce: 15
->>>>>>> main
   canMove: 1
   groundedMask:
     serializedVersion: 2
@@ -649,8 +623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362bc777868d4274dbcc28a1ae168f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNetworkAbility: 1
   ability: {fileID: 11400000, guid: 07ff79245a0caaf468291e328eb727e0, type: 2}
+  isLocked: 0
+  abilityIcon: {fileID: 0}
 --- !u!114 &1337753319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,8 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362bc777868d4274dbcc28a1ae168f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNetworkAbility: 1
   ability: {fileID: 11400000, guid: 4374700bdeb34a248b4d43841178033d, type: 2}
+  isLocked: 0
+  abilityIcon: {fileID: 0}
 --- !u!1001 &1620832043487426591
 PrefabInstance:
   m_ObjectHideFlags: 0

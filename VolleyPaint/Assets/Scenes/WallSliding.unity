@@ -4947,8 +4947,13 @@ MonoBehaviour:
   teamOneText: {fileID: 1354551736}
   teamTwoText: {fileID: 1698815181}
   mainMenuCamera: {fileID: 0}
+  flyCamera: {fileID: 0}
+  heroSelectCamera: {fileID: 0}
   scoreKeepingCanvas: {fileID: 0}
   mainMenuCanvas: {fileID: 0}
+  heroSelectCanvas: {fileID: 0}
+  confirmButton: {fileID: 0}
+  userPlayer: {fileID: 0}
 --- !u!1 &1276966455
 GameObject:
   m_ObjectHideFlags: 0
@@ -7749,8 +7754,13 @@ MonoBehaviour:
   teamOneText: {fileID: 1354551736}
   teamTwoText: {fileID: 1698815181}
   mainMenuCamera: {fileID: 1468178656}
+  flyCamera: {fileID: 0}
+  heroSelectCamera: {fileID: 0}
   scoreKeepingCanvas: {fileID: 425244807}
   mainMenuCanvas: {fileID: 1023176343}
+  heroSelectCanvas: {fileID: 0}
+  confirmButton: {fileID: 0}
+  userPlayer: {fileID: 0}
 --- !u!4 &1941388239
 Transform:
   m_ObjectHideFlags: 0
