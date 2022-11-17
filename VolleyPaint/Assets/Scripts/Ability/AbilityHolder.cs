@@ -37,6 +37,8 @@ public class AbilityHolder : MonoBehaviour
 
     void Update()
     {
+        if (!ability) return;
+
         // takes care of cooldown of the ability
         switch (state)
         {
