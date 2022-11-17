@@ -83,10 +83,41 @@ public class BallBehaviour : ProjectileBehaviour
         Fire(target, tCurrentA);
     }
 
+    void LockAllAbilityOf(GameObject player)
+    {
+        AbilityHolder[] abilityHolders = player.GetComponents<AbilityHolder>();
+        foreach(AbilityHolder ah in abilityHolders)
+        {
+            ah.isLocked = true;
+        }
+    }
+
+    void UnlockAllAbilityOf(GameObject player)
+    {
+        AbilityHolder[] abilityHolders = player.GetComponents<AbilityHolder>();
+        foreach (AbilityHolder ah in abilityHolders)
+        {
+            ah.isLocked = true;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("AbilityBox"))
         {
+            if (other.gameObject.name == "Team1")
+            { 
+                // enables team1 ability
+
+                // disables team2 ability
+
+            } else if (other.gameObject.name == "Team2")
+            {
+                // enables team2 ability
+
+                // disables team1 ability
+
+            }
             Debug.Log("Trigger name: " + other.gameObject.name);
         }
     }
