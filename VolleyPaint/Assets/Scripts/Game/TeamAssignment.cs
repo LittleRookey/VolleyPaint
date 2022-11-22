@@ -14,10 +14,6 @@ public class TeamAssignment : MonoBehaviour
     {
         assignedTeam = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamToAutoAssignTo();
 
-        // turn off character controller before teleporting
-        CharacterController cc = gameObject.GetComponent<CharacterController>();
-        cc.enabled = false;
-
         if (assignedTeam == Team.teamOne)
         {
             print("Player joined Team 1");
@@ -29,8 +25,6 @@ public class TeamAssignment : MonoBehaviour
             transform.position = teamTwoSpawn;
             transform.localRotation *= Quaternion.Euler(0, 180, 0);
         }
-
-        cc.enabled = true;
     }
 
     // Update is called once per frame

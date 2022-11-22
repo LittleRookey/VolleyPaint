@@ -388,7 +388,6 @@ GameObject:
   - component: {fileID: 3233990949964637707}
   - component: {fileID: 358610328}
   - component: {fileID: 358610339}
-  - component: {fileID: 5015974830339491387}
   m_Layer: 0
   m_Name: newPlayer
   m_TagString: Player
@@ -590,8 +589,8 @@ MonoBehaviour:
   mouseSensitivityX: 1
   mouseSensitivityY: 1
   walkSpeed: 10
-  jumpForce: 15
-  canMove: 0
+  jumpForce: 300
+  canMove: 1
   groundedMask:
     serializedVersion: 2
     m_Bits: 64
@@ -608,26 +607,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 266aa23d9d706c94dbb557f3ce577d12, type: 2}
---- !u!114 &5015974830339491387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8527579545816297118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719d1149965e23148a7a767ba9cfb11d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivityX: 1
-  mouseSensitivityY: 1
-  walkSpeed: 5
-  jumpForce: 15
-  canMove: 1
-  groundedMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1001 &1620832043487426591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -730,6 +709,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7462083263006788054, guid: 3adc5e4cf115fc74187459241ac41c47,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3adc5e4cf115fc74187459241ac41c47, type: 3}
 --- !u!4 &700567656351664302 stripped
@@ -823,6 +807,11 @@ PrefabInstance:
     - target: {fileID: 5169068958689304604, guid: 3adc5e4cf115fc74187459241ac41c47,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462083263006788054, guid: 3adc5e4cf115fc74187459241ac41c47,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
