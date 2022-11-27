@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb3c9c6f7de2314aa23043871d4d25f, type: 3}
   m_Name: Shoot Down
   m_EditorClassIdentifier: 
-  showLog: 0
+  showLog: 1
   name: 
-  coolDownTime: 10
-  activeTime: 0
+  coolDownTime: 5
+  activeTime: 0.6
   description: 
   abilityType: 0
   key: 101
-  Instantaneous: 0
+  Instantaneous: 1
   cantMoveWhileUsingAbility: 0
   ballDownSpeed: 700
-  audioClip: {fileID: 0}
+  lightning: {fileID: 0}
