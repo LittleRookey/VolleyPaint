@@ -66,14 +66,14 @@ namespace Blobcreate.ProjectileToolkit
 
 		protected virtual void OnEnable()
 		{
-			if (line != null)
-				line.enabled = true;
+			//if (line != null)
+				//line.enabled = true;
 		}
 
 		protected virtual void OnDisable()
 		{
-			if (line != null)
-				line.enabled = false;
+			//if (line != null)
+			//	line.enabled = false;
 		}
 	}
 }

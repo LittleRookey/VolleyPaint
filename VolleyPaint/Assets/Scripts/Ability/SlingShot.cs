@@ -21,8 +21,11 @@ public class SlingShot : Ability
 	float currentA;
 	float currentTorque;
 
+	public GameObject trajectoryPrefab;
+
 	private GameObject ball;
 	private Rigidbody rb;
+	private GameObject trajectoryObj;
 
 	//private TrajectoryPredictor trajectorySpawned;
 
@@ -49,6 +52,7 @@ public class SlingShot : Ability
 			if (ball != null)
             {
 				trajectory = ball.GetComponentInChildren<TrajectoryPredictor>();
+				trajectory.Line.enabled = true;
 				trajectory.enabled = false;
             }
         }
@@ -66,7 +70,9 @@ public class SlingShot : Ability
     {
         base.OnAbilityEnd(parent);
 		OnFireButtonUp();
+		trajectory.Line.enabled = false;
 		trajectory.enabled = false;
+
 	}
 
 	private void DrawPredictionLine()
@@ -127,4 +133,17 @@ public class SlingShot : Ability
 		currentA = smallA;
 		currentTorque = 0f;
 	}
+	// might be needed if we dont want the trajectory object being in the scene when the player is not using the slingshot ability,
+	// but would have to use the awake method in AbilityHolder so not worth for now
+//    private void Awake()
+//    {
+//		Debug.Log("traj create");
+//		ball = GameObject.FindGameObjectWithTag("Ball");
+//		trajectoryObj = Instantiate(trajectoryPrefab, ball.transform);
+//    }
+
+//    private void OnDestroy()
+//    {
+//		Destroy(trajectoryObj);
+//;    }
 }

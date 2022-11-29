@@ -48,6 +48,7 @@ namespace Blobcreate.Universal
             {
 				ContactPoint contact = collision.GetContact(0);
 				GameObject hitImpactObj = Instantiate(explosionFX.gameObject, contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
+				Destroy(hitImpactObj, 1f);
 				//hitImpactObj.transform.position = contact.point;
 				//hitImpactObj.transform.forward = contact.normal;
 			}
