@@ -498,8 +498,8 @@ MonoBehaviour:
   shootType: 0
   normal_hitImpact: {fileID: 1061481793025988, guid: 5752233f067735c45bf0f75f8afd4a3f,
     type: 3}
-  ballSpeed: 2000
-  ballJumpSpeed: 1200
+  ballSpeed: 2500
+  ballJumpSpeed: 1500
   bulletLimit: 0
   jumpBulletLimit: 0
   isTestingWithoutNetwork: 0
