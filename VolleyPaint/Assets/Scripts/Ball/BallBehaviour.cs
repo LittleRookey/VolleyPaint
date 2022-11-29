@@ -70,7 +70,7 @@ public class BallBehaviour : ProjectileBehaviour
     [ServerRpc]
     public void FireServerRPC(Vector3 target, float tCurrentA)
     {
-        Fire(target, tCurrentA);
+        //Fire(target, tCurrentA);
         //var b = Instantiate(bulletPrefab, launchPoint.position, launchPoint.rotation);
         FireClientRPC(target, tCurrentA);
 
