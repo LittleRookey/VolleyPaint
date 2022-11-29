@@ -14,9 +14,6 @@ public class TeamAssignment : MonoBehaviour
     {
         assignedTeam = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamToAutoAssignTo();
 
-        // turn off character controller before teleporting
-
-
         if (assignedTeam == Team.teamOne)
         {
             print("Player joined Team 1");

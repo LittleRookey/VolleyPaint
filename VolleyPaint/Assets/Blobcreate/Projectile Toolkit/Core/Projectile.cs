@@ -23,7 +23,7 @@ namespace Blobcreate.ProjectileToolkit
 			var m = vec.magnitude;
 
 			var b = n / m - m * a;
-			var vx = Mathf.Sqrt(Physics.gravity.y / (2 * a)); // vy + g*m/vx = (2*a*m + b) * vx
+			var vx = Mathf.Sqrt(GameObject.FindGameObjectWithTag("Ball").GetComponent<BallGravity>().gravity / (2 * a)); //Physics.gravity.y / (2 * a)); // vy + g*m/vx = (2*a*m + b) * vx
 			var vy = b * vx;
 			var direction = vec / m;
 			return new Vector3(direction.x * vx, vy, direction.z * vx);
