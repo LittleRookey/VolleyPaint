@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16bfa0a6e8556c64caf53fcf384f867d, type: 3}
-  m_Name: New Projectile Launch
+  m_Name: SlingShot
   m_EditorClassIdentifier: 
   showLog: 0
   name: ManageBall
