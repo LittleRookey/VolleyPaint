@@ -6131,36 +6131,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: newBall
       objectReference: {fileID: 0}
-    - target: {fileID: 543091009356626972, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 543091009356626975, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409468166838306869, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409468166838306870, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4246902056635912683, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: gravity
-      value: -24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4246902056635912683, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548330eb8312d2a4383d9b6cc554d3b0, type: 3}
 --- !u!1 &1240629145

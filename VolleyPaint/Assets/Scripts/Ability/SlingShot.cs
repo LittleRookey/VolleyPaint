@@ -88,7 +88,6 @@ public class SlingShot : Ability
 	public void RenderLaunch(Vector3 origin, Vector3 target)
 	{
 		var v = Projectile.VelocityByA(origin, target, currentA);
-		Debug.Log(v);
 		trajectory.Render(origin, v, target, 16);
 	}
 
@@ -104,8 +103,7 @@ public class SlingShot : Ability
 
 		// Magic happens!
 		var f = Projectile.VelocityByA(ball.transform.position, target, currentA);
-		Debug.Log("f: " +  f);
-		rb.AddForce(f, ForceMode.VelocityChange );
+		rb.AddForce(f, ForceMode.VelocityChange);
 
         // Add some torque, not necessary, but interesting.
         var t = Vector3.Lerp(torqueForce * Random.onUnitSphere,
