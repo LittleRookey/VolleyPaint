@@ -21,5 +21,5 @@ MonoBehaviour:
   key: 101
   Instantaneous: 1
   cantMoveWhileUsingAbility: 0
-  ballDownSpeed: 700
-  lightning: {fileID: 0}
+  ballDownSpeed: 900
+  lightning: {fileID: 178460, guid: 2736bbc2f2c78a949957b0719c2992bd, type: 3}
