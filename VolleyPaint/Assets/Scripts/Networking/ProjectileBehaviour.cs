@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace Blobcreate.Universal
 {
-	public abstract class ProjectileBehaviour : MonoBehaviour
+	public abstract class ProjectileBehaviour : NetworkBehaviour
 	{
 		[SerializeField] protected Transform explosionFX;
 

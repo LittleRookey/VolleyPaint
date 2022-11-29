@@ -25,11 +25,6 @@ public class TeamAssignment : MonoBehaviour
             transform.position = teamTwoSpawn;
             transform.localRotation *= Quaternion.Euler(0, 180, 0);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 }
