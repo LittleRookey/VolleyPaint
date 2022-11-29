@@ -93,12 +93,12 @@ public class MatchMaking : MonoBehaviour
 
     private async Task JoinLobby(string code)
     {
-        uiManager.GetComponent<UIManager>().SetGameActive(true);
-
         JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode: code);
 
         _transport.SetClientRelayData(alloc.RelayServer.IpV4, (ushort)alloc.RelayServer.Port, alloc.AllocationIdBytes, alloc.Key, alloc.ConnectionData, alloc.HostConnectionData);
         NetworkManager.Singleton.StartClient();
+        
+        uiManager.GetComponent<UIManager>().SetGameActive(true);
     }
 
     public async void CreateGame()
