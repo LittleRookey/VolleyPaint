@@ -18,7 +18,8 @@ MonoBehaviour:
   activeTime: 3
   description: 
   abilityType: 1
-  key: 304
+  key: 101
+  Instantaneous: 0
   cantMoveWhileUsingAbility: 0
   maxEnergy: 750
   currentEnergy: 0

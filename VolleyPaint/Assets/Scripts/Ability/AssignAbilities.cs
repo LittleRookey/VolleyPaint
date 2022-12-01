@@ -7,6 +7,7 @@ public class AssignAbilities : MonoBehaviour
     public Ability superJump;
     public Ability slingShot;
     public Ability shootDown;
+    public Ability slide;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +23,17 @@ public class AssignAbilities : MonoBehaviour
 
     public void AssignSuperJump()
     {
-        ChangeAbilities(superJump);
+        ChangeAbilities(superJump, slide);
     }
 
     public void AssignSlingShot()
     {
-        ChangeAbilities(slingShot);
+        ChangeAbilities(slingShot, slide);
     }
 
     public void AssignShootDown()
     {
-        ChangeAbilities(shootDown);
+        ChangeAbilities(shootDown, slide);
     }
 
 

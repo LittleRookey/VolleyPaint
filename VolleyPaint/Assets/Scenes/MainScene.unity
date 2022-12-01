@@ -2652,11 +2652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'SuperJump
-
-    +
-
-    PowerShot'
+  m_text: JumpShot
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -6758,7 +6754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1468178654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7191,11 +7187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Slingshot
-
-    +
-
-    Slide'
+  m_text: Slingshot
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -9858,6 +9850,7 @@ MonoBehaviour:
   superJump: {fileID: 11400000, guid: 266aa23d9d706c94dbb557f3ce577d12, type: 2}
   slingShot: {fileID: 11400000, guid: 4374700bdeb34a248b4d43841178033d, type: 2}
   shootDown: {fileID: 11400000, guid: 6298aab44838c9841937432b265017a0, type: 2}
+  slide: {fileID: 11400000, guid: 07ff79245a0caaf468291e328eb727e0, type: 2}
 --- !u!1 &1952244496
 GameObject:
   m_ObjectHideFlags: 0

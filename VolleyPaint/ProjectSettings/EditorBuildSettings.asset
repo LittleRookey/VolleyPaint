@@ -7,23 +7,23 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: 
-    guid: 8eb6f24777004fb4889482db5a5b4881
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
-    guid: 232abe963fbeb9840acb863a395fb550
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
-    guid: 99c9720ab356a0642a771bea13969a05
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
-    guid: 7946fdaf469d0fa40851e905def7389e
-  - enabled: 1
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/WallSliding.unity
     guid: e76ae802eb541df4a892445b9492715e
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: f5c383d56da46be41a3f93bad891b086
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestingScene.unity
     guid: 1977222dd83ae3b4599ef3e1d0fd71e4
   m_configObjects: {}
