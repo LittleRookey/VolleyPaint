@@ -34,7 +34,8 @@ public class Bullet : MonoBehaviour
     {
         if (bulletType == eBulletType.Projectile && collision.gameObject.CompareTag("Ball"))
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShoot>().InitiateShootBall(collision.transform.position, transform.forward);
+            PlayerShoot shootScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShoot>();
+            shootScript.GetComponent<PlayerShoot>().InitiateShootBall(collision.transform.position, transform.forward, shootScript.ballSpeed);
         }
 
         ContactPoint contact = collision.GetContact(0);

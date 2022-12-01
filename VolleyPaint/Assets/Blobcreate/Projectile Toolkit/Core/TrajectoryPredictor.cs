@@ -62,19 +62,21 @@ namespace Blobcreate.ProjectileToolkit
 		protected virtual void Awake()
 		{
 			positions = new Vector3[16];
-			Gravity = Physics.gravity;
+
+			float ballGravity = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallGravity>().gravity;
+			Gravity = new Vector3(0f, ballGravity, 0f); // Physics.gravity;
 		}
 
 		protected virtual void OnEnable()
 		{
-			if (line != null)
-				line.enabled = true;
+			//if (line != null)
+				//line.enabled = true;
 		}
 
 		protected virtual void OnDisable()
 		{
-			if (line != null)
-				line.enabled = false;
+			//if (line != null)
+			//	line.enabled = false;
 		}
 	}
 }

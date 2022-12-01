@@ -25,7 +25,7 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField] public eShootType shootType;
     [SerializeField] private GameObject normal_hitImpact;
 
-    [SerializeField] private float ballSpeed;
+    [SerializeField] public float ballSpeed;
     [SerializeField] private float ballJumpSpeed = 900f;
 
     private float fireRateCountDown = 0;
@@ -100,14 +100,29 @@ public class PlayerShoot : NetworkBehaviour
             Vector3 camDir = camTransform.forward;
             bool isBallShot = IsBallShotRaycast();
 
+            // spawn bullet and do other stuff
             OnPlayerShoot(camDir);
             OnPlayerShootServerRPC(camDir);
 
+            // only runs if player hits ball
             if (isBallShot && bulletType == eBulletType.Hitscan)
             {
                 Vector3 ballPos = ballTransform.position;
+                Vector3 ballDir;
+                float ballMag;
 
-                InitiateShootBall(ballPos, camDir);
+                switch (shootType)
+                {
+                    case eShootType.Jump:
+                        ballDir = Vector3.up;
+                        ballMag = ballJumpSpeed;
+                        break;
+                    default:
+                        ballDir = camDir;
+                        ballMag = ballSpeed;
+                        break;
+                }
+                InitiateShootBall(ballPos, ballDir, ballMag);
             }
 
             bulletsLeft -= 1;
@@ -138,36 +153,26 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     // made into public helper function so Bullet.cs could call this when using a projectile bullet
-    public void InitiateShootBall(Vector3 position, Vector3 direction)
+    public void InitiateShootBall(Vector3 position, Vector3 direction, float magnitude)
     {
-        ShootBall(position, direction);
-        ShootBallServerRPC(position, direction);
+        ShootBall(position, direction, magnitude);
+        ShootBallServerRPC(position, direction, magnitude);
     }
 
-    private void ShootBall(Vector3 position, Vector3 direction)
+    private void ShootBall(Vector3 position, Vector3 direction, float magnitude)
     {
         Rigidbody rb = ballTransform.GetComponent<Rigidbody>();
-        switch (shootType)
-        {
-            case eShootType.Normal:
-                // updates ball position to where it was hit so all ball instances across clients should take the same path
-                ballTransform.position = position;
 
-                // 0s velocity and adds forward force
-                rb.isKinematic = false;
-                rb.velocity = Vector3.zero;
-                rb.AddForce(direction * ballSpeed);
-                break;
-            case eShootType.Jump:
-                // updates ball position to where it was hit so all ball instances across clients should take the same path
-                ballTransform.position = position;
+        // updates ball position to where it was hit so all ball instances across clients should take the same path
+        ballTransform.position = position;
 
-                // 0s velocity and adds forward force
-                rb.isKinematic = false;
-                rb.velocity = Vector3.zero;
-                rb.AddForce(Vector3.up * ballJumpSpeed);
-                break;
-        }
+        // 0s velocity and activates ball
+        rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
+
+        // adds force to ball
+        rb.AddForce(direction * magnitude);
+
         Debug.Log("ball shot");
     }
 
@@ -181,16 +186,16 @@ public class PlayerShoot : NetworkBehaviour
 
 
     [ServerRpc] // client tells server to do something
-    private void ShootBallServerRPC(Vector3 position, Vector3 direction)
+    private void ShootBallServerRPC(Vector3 position, Vector3 direction, float magnitude)
     {
-        ShootBallClientRPC(position, direction);
+        ShootBallClientRPC(position, direction, magnitude);
     }
 
     [ClientRpc] // server telling the clients to do something
-    private void ShootBallClientRPC(Vector3 position, Vector3 direction)
+    private void ShootBallClientRPC(Vector3 position, Vector3 direction, float magnitude)
     {
         if (IsOwner) return; // ignore client that shot ball since force was already added
-        ShootBall(position, direction);
+        ShootBall(position, direction, magnitude);
     }
 
 

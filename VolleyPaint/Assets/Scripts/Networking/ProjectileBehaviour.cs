@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace Blobcreate.Universal
 {
-	public abstract class ProjectileBehaviour : MonoBehaviour
+	public abstract class ProjectileBehaviour : NetworkBehaviour
 	{
 		[SerializeField] protected Transform explosionFX;
 
@@ -47,6 +48,7 @@ namespace Blobcreate.Universal
             {
 				ContactPoint contact = collision.GetContact(0);
 				GameObject hitImpactObj = Instantiate(explosionFX.gameObject, contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
+				Destroy(hitImpactObj, 1f);
 				//hitImpactObj.transform.position = contact.point;
 				//hitImpactObj.transform.forward = contact.normal;
 			}

@@ -53,6 +53,11 @@ public class GameManagement : NetworkBehaviour
             {
                 // allows players to shoot again
                 player.GetComponent<PlayerShoot>().enabled = true;
+                foreach (AbilityHolder ability in player.GetComponents<AbilityHolder>())
+                {
+                    ability.enabled = true;
+                }
+
 
                 // hide round won/lost text
                 roundOverText.gameObject.SetActive(false);
@@ -107,6 +112,10 @@ public class GameManagement : NetworkBehaviour
 
             // prevents players from shooting
             player.GetComponent<PlayerShoot>().enabled = false;
+            foreach (AbilityHolder ability in player.GetComponents<AbilityHolder>())
+            {
+                ability.enabled = false;
+            }
         }
     }
 
