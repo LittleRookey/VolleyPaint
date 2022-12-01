@@ -502,7 +502,7 @@ MonoBehaviour:
   ballJumpSpeed: 1500
   reloadCooldown: 2
   bulletLimit: 3
-  jumpBulletLimit: 0
+  gunController: {fileID: 7724618796283051061}
   isTestingWithoutNetwork: 0
 --- !u!114 &-4832143378244238688
 MonoBehaviour:
