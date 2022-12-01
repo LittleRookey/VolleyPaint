@@ -67,7 +67,7 @@ public class BallBehaviour : ProjectileBehaviour
             torqueForce * (target - transform.position).normalized, currentTorque);
         rb.AddTorque(t, ForceMode.VelocityChange);
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void FireServerRPC(Vector3 target, float tCurrentA)
     {
         //Fire(target, tCurrentA);
@@ -79,7 +79,8 @@ public class BallBehaviour : ProjectileBehaviour
     [ClientRpc]
     private void FireClientRPC(Vector3 target, float tCurrentA)
     {
-        if (IsOwner) return;
+        //if (IsLocalPlayer) return;
+        Debug.Log("Shot!");
         Fire(target, tCurrentA);
     }
 

@@ -136,7 +136,7 @@ public class GameManagement : NetworkBehaviour
     public Team GetTeamToAutoAssignTo()
     {
         int totalPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
-        print(totalPlayers);
+        //print(totalPlayers);
         if (totalPlayers % 2 == 1)
         {
             return Team.teamOne;

@@ -128,7 +128,7 @@ public class SlingShot : Ability
 	{
 		rb.isKinematic = false;
 		Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 300f, groundMask);
-        Fire(hit.point);
+        //Fire(hit.point);
         ball.GetComponent<BallBehaviour>().FireServerRPC(hit.point, currentA);
 		currentA = smallA;
 		currentTorque = 0f;
