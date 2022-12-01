@@ -2020,8 +2020,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425244807}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 17.306698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2034,7 +2034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 993.1095, y: 635.3893}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &484215254
@@ -2115,80 +2115,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484215254}
   m_CullTransparentMesh: 1
---- !u!1001 &500485995
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4521953449912904797, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3436259679
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.1951809
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9980866
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.061832465
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -7.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297112, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527579545816297118, guid: df7a1696aae941040bf41ff485dd26c4,
-        type: 3}
-      propertyPath: m_Name
-      value: newPlayer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: df7a1696aae941040bf41ff485dd26c4, type: 3}
 --- !u!1 &502001543
 GameObject:
   m_ObjectHideFlags: 0
@@ -6438,7 +6364,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354551734
 GameObject:
@@ -10706,6 +10632,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1609903832}
     m_Modifications:
+    - target: {fileID: 3767094723125360444, guid: ca7e211594f3a44478ae59ecaae0362d,
+        type: 3}
+      propertyPath: procedrualRampColorTint.b
+      value: 0.14779866
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767094723125360444, guid: ca7e211594f3a44478ae59ecaae0362d,
+        type: 3}
+      propertyPath: procedrualRampColorTint.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767094723125360444, guid: ca7e211594f3a44478ae59ecaae0362d,
+        type: 3}
+      propertyPath: procedrualRampColorTint.r
+      value: 0.66902274
+      objectReference: {fileID: 0}
     - target: {fileID: 3767094723125360444, guid: ca7e211594f3a44478ae59ecaae0362d,
         type: 3}
       propertyPath: materialLayers.Array.data[0]

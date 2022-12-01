@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour
             teamOneText.text = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamOneScore().ToString();
             teamTwoText.text = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamTwoScore().ToString();
         }
-
+        print("It is here UIManger0");
         // disable player in spectate mode
-        // called in update so player is disabled as soon as network is connected (when there a main camera spawns)
+        // called in update so player is disabled as soon as network is connected (when there a main camera spawns
         if (!heroSelected && Camera.main && !userPlayer)
         {
             userPlayer = Camera.main.transform.parent.gameObject;

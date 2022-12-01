@@ -111,6 +111,7 @@ public class MatchMaking : MonoBehaviour
     {
         try 
         {
+            Debug.Log("CreateLobby!");
             uiManager.GetComponent<UIManager>().SetGameActive(true);
 
             // create a relay allocation and generate a join code to share with the lobby
