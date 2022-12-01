@@ -70,8 +70,10 @@ public class PlayerShoot : NetworkBehaviour
 
         fireRateCountDown += Time.deltaTime;
 
+        GameObject.Find("UIManager").GetComponent<UIManager>().SetReloadText(bulletsLeft.ToString() + "/" + bulletLimit.ToString());
         if (isReloading)
         {
+            GameObject.Find("UIManager").GetComponent<UIManager>().SetReloadText("Reloading");
             reloadTimeElapsed += Time.deltaTime;
 
             // Trigger for when to play reload sound
