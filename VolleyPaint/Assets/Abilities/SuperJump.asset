@@ -19,7 +19,7 @@ MonoBehaviour:
   activeTime: 3
   description: 
   abilityType: 1
-  key: 101
+  key: 304
   Instantaneous: 0
   cantMoveWhileUsingAbility: 0
   chargeCanvas: {fileID: 1247406339535141145, guid: 174322b624aed29478292c4f9f702347,

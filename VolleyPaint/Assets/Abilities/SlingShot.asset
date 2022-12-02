@@ -15,7 +15,7 @@ MonoBehaviour:
   showLog: 0
   icon: {fileID: 21300000, guid: f4a8ef14b0e5d3245b4f80af4d84d740, type: 3}
   name: ManageBall
-  coolDownTime: 2
+  coolDownTime: 5
   activeTime: 3
   description: 
   abilityType: 0
