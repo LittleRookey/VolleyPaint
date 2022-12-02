@@ -48,6 +48,8 @@ public class UIManager : MonoBehaviour
             userPlayer.SetActive(!gameStarted);
             if (!spectate)
             {
+                userPlayer.transform.position = new Vector3(userPlayer.transform.position.x, -10f, userPlayer.transform.position.z); // to keep track of specs vs. players selecting their abilities
+
                 heroSelectCanvas.SetActive(true);
                 heroSelectCamera.SetActive(true);
 

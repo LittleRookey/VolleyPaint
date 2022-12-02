@@ -36,7 +36,7 @@ public class AbilityHolder : MonoBehaviour
         OnAbilityRunning += ability.OnAbilityRunning;
         OnAbilityEnd += ability.OnAbilityEnd;
 
-        TurnSkillOff(); // reset cooldown once round starts
+        TurnSkillOffNoActivation(); // reset cooldown once round starts
     }
 
     private void OnDisable()
@@ -45,7 +45,7 @@ public class AbilityHolder : MonoBehaviour
         OnAbilityRunning -= ability.OnAbilityRunning;
         OnAbilityEnd -= ability.OnAbilityEnd;
 
-        if (isActive) { TurnSkillOff(); } // so active abilities don't resume once a new round starts
+        if (isActive) { TurnSkillOffNoActivation(); } // so active abilities don't resume once a new round starts
     }
 
     // Assigns ability and updates the icon if exists
@@ -137,5 +137,13 @@ public class AbilityHolder : MonoBehaviour
         state = AbilityState.cooldown;
         cooldownTime = ability.coolDownTime;
         OnAbilityEnd?.Invoke(gameObject);
+    }
+
+    private void TurnSkillOffNoActivation()
+    {
+        activeTime = 0f;
+        isActive = false;
+        state = AbilityState.cooldown;
+        cooldownTime = ability.coolDownTime;
     }
 }

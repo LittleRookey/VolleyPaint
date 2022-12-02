@@ -14,17 +14,29 @@ public class TeamAssignment : MonoBehaviour
     {
         assignedTeam = GameObject.Find("GameManager").GetComponent<GameManagement>().GetTeamToAutoAssignTo();
 
-        if (assignedTeam == Team.teamOne)
+        RespawnPlayer(assignedTeam);
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < 0 || transform.position.z > 0 && assignedTeam == Team.teamOne || transform.position.z < 0 && assignedTeam == Team.teamTwo) // if player goes below map or goes on the opponents side, respawn the player
+        {
+            RespawnPlayer(assignedTeam);
+        }
+    }
+
+    private void RespawnPlayer(Team team)
+    {
+        if (team == Team.teamOne)
         {
             print("Player joined Team 1");
             transform.position = teamOneSpawn;
         }
-        else if (assignedTeam == Team.teamTwo)
+        else if (team == Team.teamTwo)
         {
             print("Player joined Team 2");
             transform.position = teamTwoSpawn;
             transform.localRotation *= Quaternion.Euler(0, 180, 0);
         }
-
     }
 }

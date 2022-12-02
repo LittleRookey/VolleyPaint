@@ -22,5 +22,5 @@ MonoBehaviour:
   key: 306
   Instantaneous: 0
   cantMoveWhileUsingAbility: 1
-  slideForce: 15
+  slideForce: 40
   reducedHeight: 0.2

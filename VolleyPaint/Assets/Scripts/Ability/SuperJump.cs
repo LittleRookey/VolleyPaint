@@ -57,7 +57,10 @@ public class SuperJump : Ability
         base.OnAbilityEnd(parent);
         //collider.height = originHeight;
         chargeCanvasCopy.gameObject.SetActive(false);
+
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // zeroes y velocity because when pressing regular jump at same time, you go insanely high
         rb.AddForce(Vector3.up * currentEnergy);
+
         currentEnergy = 0f;
         parent.GetComponent<PlayerMovement>().walkSpeed = originSpeed;
     }
