@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SuperJump
   m_EditorClassIdentifier: 
   showLog: 1
+  icon: {fileID: 21300000, guid: 8ede5d9f565d7c7479cf71533058c729, type: 3}
   name: Super Jump
   coolDownTime: 4
   activeTime: 3

@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Slide
   m_EditorClassIdentifier: 
   showLog: 1
+  icon: {fileID: 21300000, guid: ec495e74aa640e240bae18557fee48a7, type: 3}
   name: Slide
   coolDownTime: 3
   activeTime: 3
   description: Player slides
   abilityType: 0
   key: 306
+  Instantaneous: 0
   cantMoveWhileUsingAbility: 1
   slideForce: 15
   reducedHeight: 0.2

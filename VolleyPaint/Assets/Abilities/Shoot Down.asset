@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shoot Down
   m_EditorClassIdentifier: 
   showLog: 1
+  icon: {fileID: 21300000, guid: e37da57279a893c42b9dacfa1383e09b, type: 3}
   name: 
   coolDownTime: 5
   activeTime: 0.6

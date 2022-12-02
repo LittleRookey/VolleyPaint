@@ -46,6 +46,17 @@ public class AbilityHolder : MonoBehaviour
         if (isActive) { TurnSkillOff(); } // so active abilities don't resume once a new round starts
     }
 
+    // Assigns ability and updates the icon if exists
+    public void AssignAbility(Ability ab, Image abilityUIImage)
+    {
+        this.ability = ab;
+
+        this.abilityIcon = abilityUIImage; // assign slot image for cooldown
+
+        if (ab.icon != null)
+            this.abilityIcon.sprite = ab.icon;
+
+    }
     void Update()
     {
         if (!ability) return;

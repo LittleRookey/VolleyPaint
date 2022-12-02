@@ -15,6 +15,7 @@ public class Ability : ScriptableObject
     public bool showLog;
 
     [Header("Main Ability Settings")]
+    public Sprite icon;
     public new string name; // ability name
     public float coolDownTime; // cooldown time for ability
     public float activeTime; // time to start cooldown after ability is activated, normally runs until the player's on key up event

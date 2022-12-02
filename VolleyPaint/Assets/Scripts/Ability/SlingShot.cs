@@ -9,7 +9,7 @@ public class SlingShot : Ability
 {
 	[Header("Specific Settings")]
 	//public Transform launchPoint;
-	//public Rigidbody bulletPrefab;
+	//public Rigidbody bulletPrefab
 	public LayerMask groundMask;
 	public float torqueForce = 0f;
 	public float smallA = -0.1f;
