@@ -48,6 +48,8 @@ public class PlayerShoot : NetworkBehaviour
     [Header("Debug")]
     public bool isTestingWithoutNetwork;
 
+    public GunRecoil gunRecoil;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +101,7 @@ public class PlayerShoot : NetworkBehaviour
         {
             fireRateCountDown = 0f;
 
+            gunRecoil.RecoilFire();
             Vector3 camDir = camTransform.forward;
             bool isBallShot = IsBallShotRaycast();
 
@@ -183,7 +186,8 @@ public class PlayerShoot : NetworkBehaviour
         MasterAudio.PlaySound3DAtVector3("SilencedPistol", transform.position);
         
         // spawn bullet
-        Instantiate(bulletPrefab, gunShootPos.position, Quaternion.LookRotation(camDir));
+        Bullet bullet = Instantiate(bulletPrefab, gunShootPos.position, Quaternion.LookRotation(camDir)).GetComponent<Bullet>();
+        bullet.SetBullet(normal_hitImpact);
     }
 
 

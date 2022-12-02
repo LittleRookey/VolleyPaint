@@ -70,6 +70,7 @@ public class BallBehaviour : ProjectileBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void FireServerRPC(Vector3 target, float tCurrentA)
     {
+        //serverRpcParams.Receive.SenderClientId;
         //Fire(target, tCurrentA);
         //var b = Instantiate(bulletPrefab, launchPoint.position, launchPoint.rotation);
         FireClientRPC(target, tCurrentA);
@@ -79,6 +80,7 @@ public class BallBehaviour : ProjectileBehaviour
     [ClientRpc]
     private void FireClientRPC(Vector3 target, float tCurrentA)
     {
+        //if (IsOwner) return;
         //if (IsLocalPlayer) return;
         Debug.Log("Shot!");
         Fire(target, tCurrentA);

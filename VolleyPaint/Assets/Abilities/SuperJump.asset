@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: SuperJump
   m_EditorClassIdentifier: 
   showLog: 1
+  icon: {fileID: 21300000, guid: 8ede5d9f565d7c7479cf71533058c729, type: 3}
   name: Super Jump
   coolDownTime: 4
   activeTime: 3
   description: 
   abilityType: 1
-  key: 101
+  key: 304
   Instantaneous: 0
   cantMoveWhileUsingAbility: 0
+  chargeCanvas: {fileID: 1247406339535141145, guid: 174322b624aed29478292c4f9f702347,
+    type: 3}
   maxEnergy: 750
   currentEnergy: 0
   energyGainSpeed: 300

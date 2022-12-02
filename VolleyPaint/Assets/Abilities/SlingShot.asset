@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SlingShot
   m_EditorClassIdentifier: 
   showLog: 0
+  icon: {fileID: 21300000, guid: f4a8ef14b0e5d3245b4f80af4d84d740, type: 3}
   name: ManageBall
   coolDownTime: 2
   activeTime: 3

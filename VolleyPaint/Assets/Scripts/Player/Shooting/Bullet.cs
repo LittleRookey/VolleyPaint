@@ -23,11 +23,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void SetBullet(GameObject hitImpact)
     {
-
+        this.hitImpact = hitImpact;
     }
 
     private void OnCollisionEnter(Collision collision)
