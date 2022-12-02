@@ -2699,7 +2699,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 091aeb00621c8bb4aa87cdf514203aff, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a67a7e8b9d155cf4fb108dd423db9e7c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6561,21 +6561,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 543091009356626963, guid: 548330eb8312d2a4383d9b6cc554d3b0,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 543091009356626963, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 543091009356626963, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 543091009356626963, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6628,21 +6613,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: newBall
-      objectReference: {fileID: 0}
-    - target: {fileID: 543091009356626972, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409468166838306869, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4246902056635912683, guid: 548330eb8312d2a4383d9b6cc554d3b0,
-        type: 3}
-      propertyPath: gravity
-      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548330eb8312d2a4383d9b6cc554d3b0, type: 3}
@@ -10591,7 +10561,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 7285
+  frames: 7711
 --- !u!224 &2004868129 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1262146516872657287, guid: 174322b624aed29478292c4f9f702347,
