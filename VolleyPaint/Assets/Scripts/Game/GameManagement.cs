@@ -58,7 +58,6 @@ public class GameManagement : NetworkBehaviour
                     ability.enabled = true;
                 }
 
-
                 // hide round won/lost text
                 roundOverText.gameObject.SetActive(false);
 
