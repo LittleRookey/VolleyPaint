@@ -21,10 +21,10 @@ public class ShootDown : Ability
         player = Camera.main.transform.parent.gameObject;
 
         GameObject rpcManager = GameObject.Find("RPCManager");
-        rpcManager.GetComponent<NetworkAudio>().PlayNetworkedAudio("ELECTRICITY", ball.transform.position);
+        player.GetComponent<NetworkAudio>().PlayNetworkedAudio("ELECTRICITY", ball.transform.position);
 
         // spawn lightning
-        rpcManager.GetComponent<NetworkSpawnObject>().SpawnNetworkedObject();
+        player.GetComponent<NetworkSpawnOnBall>().SpawnNetworkedObject();
     }
 
     public override void OnAbilityEnd(GameObject parent)

@@ -96,7 +96,6 @@ public class GameManagement : NetworkBehaviour
             }
             servingTeam = winningTeam;
             mostRecentlyShootingTeam = Team.none;
-            roundOver = true;
 
             EndRoundClientRpc(winningTeam);
         }
@@ -106,6 +105,8 @@ public class GameManagement : NetworkBehaviour
     [ClientRpc]
     public void EndRoundClientRpc(Team winningTeam)
     {
+        roundOver = true;
+
         // displays round won/lost text
         roundOverText.gameObject.SetActive(true);
         player = Camera.main.transform.parent;

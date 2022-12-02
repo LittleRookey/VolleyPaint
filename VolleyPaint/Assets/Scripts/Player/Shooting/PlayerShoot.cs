@@ -52,7 +52,7 @@ public class PlayerShoot : NetworkBehaviour
     void Start()
     {
         ballTransform = GameObject.FindGameObjectWithTag("Ball").transform;
-        camTransform = Camera.main.transform;
+        if (IsOwner) { camTransform = Camera.main.transform; }
         bulletType = eBulletType.Hitscan;
 
         isReloading = false;

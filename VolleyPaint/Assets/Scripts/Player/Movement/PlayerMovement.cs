@@ -12,6 +12,9 @@ public class PlayerMovement : NetworkBehaviour
 	public float walkSpeed = 10.0f;
 	public float jumpForce = 15f;
 
+	public int extraJumps = 1;
+	private int jumpsLeft = 0;
+
 	public bool canMove;
 
 	Vector3 moveAmount;
@@ -68,6 +71,12 @@ public class PlayerMovement : NetworkBehaviour
 			{
 				rigidbodyR.AddForce(transform.up * jumpForce);
 			}
+			else if (jumpsLeft > 0)
+            {
+				--jumpsLeft;
+				rigidbodyR.velocity = new Vector3(rigidbodyR.velocity.x, 0f, rigidbodyR.velocity.z); // zero the y velocity before starting midair jump
+				rigidbodyR.AddForce(transform.up * jumpForce);
+			}
 		}
 
 		Ray ray = new Ray(transform.position, -transform.up);
@@ -76,6 +85,7 @@ public class PlayerMovement : NetworkBehaviour
 		if (Physics.Raycast(ray, out hit, 1 + .1f, groundedMask))
 		{
 			grounded = true;
+			jumpsLeft = extraJumps;
 		}
 		else
 		{
