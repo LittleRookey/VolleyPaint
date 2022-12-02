@@ -68,6 +68,21 @@ public class GunController : NetworkBehaviour
         StartCoroutine(GunChange(guns[activeGunIndex]));
     }
 
+    public void ReloadGunAnimation(float lapsedTime, float cooldownTime)
+    {
+        // If it's in the first half of the cooldown, bring the gun towards the player
+        // Otherwise, bring it away from the player
+        // To be fixed
+        /*if (lapsedTime <= cooldownTime / 2)
+        {
+            guns[activeGunIndex].transform.localPosition += Vector3.back * 0.001f * gunChangeSpeed;
+        }
+        else if (lapsedTime > cooldownTime / 2)
+        {
+            guns[activeGunIndex].transform.localPosition += Vector3.forward * 0.001f * gunChangeSpeed;
+        }*/
+    }
+
     IEnumerator GunChange(GameObject go)
     {
         WaitForSeconds sec = new WaitForSeconds(0.01f);
