@@ -145,7 +145,8 @@ public class PlayerShoot : NetworkBehaviour
         MasterAudio.PlaySound3DAtVector3("SilencedPistol", transform.position);
         
         // spawn bullet
-        Instantiate(bulletPrefab, gunShootPos.position, Quaternion.LookRotation(camDir));
+        Bullet bullet = Instantiate(bulletPrefab, gunShootPos.position, Quaternion.LookRotation(camDir)).GetComponent<Bullet>();
+        bullet.SetBullet(normal_hitImpact);
     }
 
 

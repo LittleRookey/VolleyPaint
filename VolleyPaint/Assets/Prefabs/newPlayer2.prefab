@@ -322,8 +322,8 @@ MonoBehaviour:
   recoilX: -20
   recoilY: 2
   recoilZ: 0.35
-  snappiness: 6
-  returnSpeed: 3
+  snappiness: 55
+  returnSpeed: 6
 --- !u!1 &3087524582036877351
 GameObject:
   m_ObjectHideFlags: 0

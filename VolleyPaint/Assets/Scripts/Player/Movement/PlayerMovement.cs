@@ -6,6 +6,8 @@ using Unity.Netcode;
 
 public class PlayerMovement : NetworkBehaviour
 {
+	[Range(60f, 90f)]
+	[SerializeField] private float maxCameraAngle = 75f;
 	public float mouseSensitivityX = 1.0f;
 	public float mouseSensitivityY = 1.0f;
 
@@ -49,7 +51,7 @@ public class PlayerMovement : NetworkBehaviour
 		// rotation
 		transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
 		verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-		verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
+		verticalLookRotation = Mathf.Clamp(verticalLookRotation, -maxCameraAngle, maxCameraAngle);
 		cameraT.localEulerAngles = Vector3.left * verticalLookRotation;
 
 		// movement
