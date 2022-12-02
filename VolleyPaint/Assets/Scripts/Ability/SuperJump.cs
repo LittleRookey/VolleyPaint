@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Litkey/Ability/SuperJump")]
 public class SuperJump : Ability
 {
+    [SerializeField] private GameObject chargeCanvas;
     [SerializeField] private float maxEnergy = 500f;
     [SerializeField] private float currentEnergy = 0f;
     [SerializeField] private float energyGainSpeed = 0.1f;
@@ -18,6 +19,9 @@ public class SuperJump : Ability
     CapsuleCollider collider;
     Rigidbody rb;
 
+    GameObject chargeCanvasCopy;
+    UICharger uiCharger; // used for bars to charge
+
     // first crouch and charge energy, can move slowly
     // on key up, super jump
     public override void OnAbilityStart(GameObject parent)
@@ -26,6 +30,16 @@ public class SuperJump : Ability
         PlayerMovement playerMovement = parent.GetComponent<PlayerMovement>();
         collider = parent.GetComponent<CapsuleCollider>();
         rb = parent.GetComponent<Rigidbody>();
+        if (chargeCanvasCopy == null && chargeCanvas != null)
+        {
+            chargeCanvasCopy = Instantiate(chargeCanvas);
+        }
+        // initialize charger
+        uiCharger = chargeCanvasCopy.GetComponent<UICharger>();
+        uiCharger.SetCharger(0f);
+
+        // turnon canvas charger
+        chargeCanvasCopy.gameObject.SetActive(true);
 
         originHeight = collider.height;
         collider.height = reducedHeight;
@@ -41,6 +55,7 @@ public class SuperJump : Ability
     public override void OnAbilityEnd(GameObject parent)
     {
         base.OnAbilityEnd(parent);
+        chargeCanvasCopy.gameObject.SetActive(false);
         collider.height = originHeight;
         rb.AddForce(Vector3.up * currentEnergy);
         currentEnergy = 0f;
@@ -51,7 +66,8 @@ public class SuperJump : Ability
     {
         if (isUsingAbility)
         {
-            
+            // sets the charge bar on charge
+            uiCharger.SetCharger(currentEnergy / maxEnergy);
             if (currentEnergy <= maxEnergy)
             {
                 currentEnergy += Time.deltaTime * energyGainSpeed;
