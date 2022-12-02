@@ -10591,7 +10591,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 6953
+  frames: 7285
 --- !u!224 &2004868129 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1262146516872657287, guid: 174322b624aed29478292c4f9f702347,

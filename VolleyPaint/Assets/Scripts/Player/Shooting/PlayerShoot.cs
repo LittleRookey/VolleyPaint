@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DarkTonic.MasterAudio;
 using Unity.Netcode;
+using DG.Tweening;
 
 public enum eShootType
 {
@@ -40,7 +41,7 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField] private int bulletLimit;
 
     [SerializeField] private GunController gunController;
-    private bool isReloading;
+    public bool isReloading { get; private set; }
     private bool reloadSoundPlayed;
     private float reloadTimeElapsed;
     private int bulletsLeft;
@@ -49,6 +50,8 @@ public class PlayerShoot : NetworkBehaviour
     public bool isTestingWithoutNetwork;
 
     public GunRecoil gunRecoil;
+
+    //[SerializeField] private DOTweenAnimation reloadAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +89,7 @@ public class PlayerShoot : NetworkBehaviour
             }
 
             // Manage animations for the gun
-            gunController.ReloadGunAnimation(reloadTimeElapsed, reloadCooldown);
+            //gunController.ReloadGunAnimation(reloadTimeElapsed, reloadCooldown);
 
             // End reloading
             if (reloadTimeElapsed >= reloadCooldown)
