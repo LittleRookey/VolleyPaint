@@ -31,6 +31,8 @@ public class GunController : NetworkBehaviour
         {
             gun.gameObject.SetActive(false);
         }
+        originGunPos = guns[0].transform.localPosition;
+        holsterGunPos = new Vector3(originGunPos.x, originGunPos.y - 0.8f, originGunPos.z);
     }
     // Start is called before the first frame update
     void Start()
@@ -67,6 +69,7 @@ public class GunController : NetworkBehaviour
         MasterAudio.PlaySound3DAtVector3("Pistol Holster", transform.position);
         StartCoroutine(GunChange(guns[activeGunIndex]));
     }
+
 
     IEnumerator GunChange(GameObject go)
     {

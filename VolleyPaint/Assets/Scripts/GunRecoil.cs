@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GunRecoil : MonoBehaviour
 {
+    [SerializeField] private GameObject targetObject;
+
     //Rotations
     private Vector3 currentRotation;
     private Vector3 targetRotation;
@@ -20,7 +22,11 @@ public class GunRecoil : MonoBehaviour
     {
         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
         currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
-        transform.localRotation = Quaternion.Euler(currentRotation);
+        if (targetObject != null)
+            targetObject.transform.localRotation = Quaternion.Euler(currentRotation);
+        else
+            transform.localRotation = Quaternion.Euler(currentRotation);
+
     }
 
     public void RecoilFire()
