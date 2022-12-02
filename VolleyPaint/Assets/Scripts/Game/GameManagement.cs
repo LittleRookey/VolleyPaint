@@ -102,24 +102,31 @@ public class GameManagement : NetworkBehaviour
             mostRecentlyShootingTeam = Team.none;
             roundOver = true;
 
-            // displays round won/lost text
-            roundOverText.gameObject.SetActive(true);
-            player = Camera.main.transform.parent;
-            if (player.GetComponent<TeamAssignment>().assignedTeam == winningTeam) // finds main camera to find team of player its assigned to
-            {
-                roundOverText.text = "ROUND WON";
-            }
-            else
-            {
-                roundOverText.text = "ROUND LOST";
-            }
+            EndRoundClientRpc(winningTeam);
+        }
+    }
 
-            // prevents players from shooting
-            player.GetComponent<PlayerShoot>().enabled = false;
-            foreach (AbilityHolder ability in player.GetComponents<AbilityHolder>())
-            {
-                ability.enabled = false;
-            }
+    // display round over text and prevent shooting on all clients
+    [ClientRpc]
+    public void EndRoundClientRpc(Team winningTeam)
+    {
+        // displays round won/lost text
+        roundOverText.gameObject.SetActive(true);
+        player = Camera.main.transform.parent;
+        if (player.GetComponent<TeamAssignment>().assignedTeam == winningTeam) // finds main camera to find team of player its assigned to
+        {
+            roundOverText.text = "ROUND WON";
+        }
+        else
+        {
+            roundOverText.text = "ROUND LOST";
+        }
+
+        // prevents players from shooting
+        player.GetComponent<PlayerShoot>().enabled = false;
+        foreach (AbilityHolder ability in player.GetComponents<AbilityHolder>())
+        {
+            ability.enabled = false;
         }
     }
 

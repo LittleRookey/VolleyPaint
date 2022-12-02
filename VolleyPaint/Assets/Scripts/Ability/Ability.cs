@@ -82,7 +82,7 @@ public class Ability : ScriptableObject
     {
         if (showLog)
         {
-            Debug.Log(name + " Ability Running");
+            //Debug.Log(name + " Ability Running");
         }
     }
 

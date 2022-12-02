@@ -24,11 +24,11 @@ public class SuperJump : Ability
     {
         base.OnAbilityStart(parent);
         PlayerMovement playerMovement = parent.GetComponent<PlayerMovement>();
-        collider = parent.GetComponent<CapsuleCollider>();
+        //collider = parent.GetComponent<CapsuleCollider>();
         rb = parent.GetComponent<Rigidbody>();
 
-        originHeight = collider.height;
-        collider.height = reducedHeight;
+        //originHeight = collider.height;
+        //collider.height = reducedHeight;
         originSpeed = playerMovement.walkSpeed;
         playerMovement.walkSpeed *= reduceSpeed;
     }
@@ -41,7 +41,7 @@ public class SuperJump : Ability
     public override void OnAbilityEnd(GameObject parent)
     {
         base.OnAbilityEnd(parent);
-        collider.height = originHeight;
+        //collider.height = originHeight;
         rb.AddForce(Vector3.up * currentEnergy);
         currentEnergy = 0f;
         parent.GetComponent<PlayerMovement>().walkSpeed = originSpeed;

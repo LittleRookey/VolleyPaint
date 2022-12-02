@@ -42,8 +42,7 @@ public class AbilityHolder : MonoBehaviour
         OnAbilityStart -= ability.OnAbilityStart;
         OnAbilityRunning -= ability.OnAbilityRunning;
         OnAbilityEnd -= ability.OnAbilityEnd;
-
-        if (isActive) { TurnSkillOff(); } // so active abilities don't resume once a new round starts
+        if (isActive) { TurnSkillOff(); print("skill off"); } // so active abilities don't resume once a new round starts
     }
 
     void Update()

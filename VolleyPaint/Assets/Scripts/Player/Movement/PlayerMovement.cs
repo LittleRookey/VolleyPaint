@@ -49,7 +49,7 @@ public class PlayerMovement : NetworkBehaviour
 		// rotation
 		transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
 		verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-		verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
+		verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90, 90);
 		cameraT.localEulerAngles = Vector3.left * verticalLookRotation;
 
 		// movement

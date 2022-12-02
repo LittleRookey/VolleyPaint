@@ -15,19 +15,21 @@ public class SlideAbility : Ability
 
     public override void OnAbilityStart(GameObject parent)
     {
+        // more of a dash instead of a slide if we comment out the height change
+
         base.OnAbilityStart(parent);
-        collider = parent.GetComponent<CapsuleCollider>();
+        //collider = parent.GetComponent<CapsuleCollider>();
         rb = parent.GetComponent<Rigidbody>();
-        originHeight = collider.height;
+        //originHeight = collider.height;
 
         // use ability
-        collider.height = reducedHeight;
+        //collider.height = reducedHeight;
         rb.AddForce(parent.transform.forward * slideForce, ForceMode.VelocityChange);
     }
 
     public override void OnAbilityEnd(GameObject parent)
     {
         base.OnAbilityEnd(parent);
-        collider.height = originHeight;
+        //collider.height = originHeight;
     }
 }
