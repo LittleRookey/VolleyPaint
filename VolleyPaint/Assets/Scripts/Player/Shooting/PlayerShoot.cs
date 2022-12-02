@@ -45,6 +45,8 @@ public class PlayerShoot : NetworkBehaviour
     [Header("Debug")]
     public bool isTestingWithoutNetwork;
 
+    public GunRecoil gunRecoil;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +71,7 @@ public class PlayerShoot : NetworkBehaviour
         {
             fireRateCountDown = 0f;
 
+            gunRecoil.RecoilFire();
             Vector3 camDir = camTransform.forward;
             bool isBallShot = IsBallShotRaycast();
 
