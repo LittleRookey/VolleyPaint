@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using TMPro;
+using DarkTonic.MasterAudio;
 
 public enum Team
 {
@@ -112,10 +113,12 @@ public class GameManagement : NetworkBehaviour
         if (player.GetComponent<TeamAssignment>().assignedTeam == winningTeam) // finds main camera to find team of player its assigned to
         {
             roundOverText.text = "ROUND WON";
+            MasterAudio.PlaySound3DAtVector3("univ0015", player.transform.position);
         }
         else
         {
             roundOverText.text = "ROUND LOST";
+            MasterAudio.PlaySound3DAtVector3("univ0005", player.transform.position);
         }
 
         // prevents players from shooting

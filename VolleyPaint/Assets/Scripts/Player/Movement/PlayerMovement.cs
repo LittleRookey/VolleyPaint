@@ -84,12 +84,14 @@ public class PlayerMovement : NetworkBehaviour
 			if (grounded)
 			{
 				rigidbodyR.AddForce(transform.up * jumpForce);
+				MasterAudio.PlaySound3DAtVector3("univ1254", transform.position);
 			}
 			else if (jumpsLeft > 0)
             {
 				--jumpsLeft;
 				rigidbodyR.velocity = new Vector3(rigidbodyR.velocity.x, 0f, rigidbodyR.velocity.z); // zero the y velocity before starting midair jump
 				rigidbodyR.AddForce(transform.up * jumpForce);
+				MasterAudio.PlaySound3DAtVector3("univ1254", transform.position);
 			}
 		}
 

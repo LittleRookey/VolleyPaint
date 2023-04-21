@@ -31,7 +31,7 @@ public class SlideAbility : Ability
         anim.SetBool("Sliding", true);
 
         MasterAudio.PlaySound3DAtVector3("Sliding", parent.transform.position); // Play sound
-
+        MasterAudio.PlaySound3DAtVector3("univ1257", parent.transform.position); // Play sound
     }
 
     public override void OnAbilityEnd(GameObject parent)
