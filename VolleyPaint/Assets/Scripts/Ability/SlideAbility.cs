@@ -25,11 +25,17 @@ public class SlideAbility : Ability
         // use ability
         //collider.height = reducedHeight;
         rb.AddForce(parent.transform.forward * slideForce, ForceMode.VelocityChange);
+
+        Animator anim = parent.transform.Find("unitychan").GetComponent<Animator>();
+        anim.SetBool("Sliding", true);
+
     }
 
     public override void OnAbilityEnd(GameObject parent)
     {
         base.OnAbilityEnd(parent);
         //collider.height = originHeight;
+        Animator anim = parent.transform.Find("unitychan").GetComponent<Animator>();
+        anim.SetBool("Sliding", false);
     }
 }

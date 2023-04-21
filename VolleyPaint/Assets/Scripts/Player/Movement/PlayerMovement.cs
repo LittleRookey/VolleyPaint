@@ -29,12 +29,15 @@ public class PlayerMovement : NetworkBehaviour
 	public LayerMask groundedMask;
 	bool cursorVisible;
 
+	Animator anim;
+
 	// Use this for initialization
 	void Start()
 	{
 		cameraT = Camera.main.transform;
 		rigidbodyR = GetComponent<Rigidbody>();
 		LockMouse();
+		anim = transform.Find("unitychan").GetComponent<Animator>();
 	}
 	public override void OnNetworkSpawn()
 	{
@@ -104,6 +107,8 @@ public class PlayerMovement : NetworkBehaviour
                 LockMouse();
             }
         }
+
+		UpdateAnimationStates();
     }
 
 	void FixedUpdate()
@@ -125,4 +130,25 @@ public class PlayerMovement : NetworkBehaviour
 		Cursor.visible = false;
 		cursorVisible = false;
 	}
+
+	void UpdateAnimationStates()
+    {
+		if (moveAmount.magnitude > 0.2f)
+        {
+			anim.SetBool("Running", true);
+        }
+		else
+        {
+			anim.SetBool("Running", false);
+        }
+
+		if (grounded)
+        {
+			anim.SetBool("Jumping", false);
+        }
+		else
+        {
+			anim.SetBool("Jumping", true);
+        }
+    }
 }

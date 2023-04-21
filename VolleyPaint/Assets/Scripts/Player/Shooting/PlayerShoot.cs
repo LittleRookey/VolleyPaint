@@ -29,7 +29,7 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField] public float ballSpeed;
     [SerializeField] private float ballJumpSpeed = 900f;
 
-    private float fireRateCountDown = 0;
+    public float fireRateCountDown;
 
     Vector3 MID_SCREEN = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
 
@@ -51,11 +51,15 @@ public class PlayerShoot : NetworkBehaviour
 
     public GunRecoil gunRecoil;
 
+    private Animator anim;
+
     //[SerializeField] private DOTweenAnimation reloadAnimation;
 
     // Start is called before the first frame update
     void Start()
     {
+        fireRateCountDown = fireRate;
+
         ballTransform = GameObject.FindGameObjectWithTag("Ball").transform;
         if (IsOwner) { camTransform = Camera.main.transform; }
         bulletType = eBulletType.Hitscan;
@@ -64,6 +68,8 @@ public class PlayerShoot : NetworkBehaviour
         reloadSoundPlayed = false;
         reloadTimeElapsed = 0.0f;
         bulletsLeft = bulletLimit;
+
+        anim = transform.Find("unitychan").GetComponent<Animator>();
     }
 
 
@@ -102,6 +108,7 @@ public class PlayerShoot : NetworkBehaviour
         }
         else if (Input.GetButton("Fire1") && fireRateCountDown >= fireRate)
         {
+            anim.SetTrigger("Shooting");
             fireRateCountDown = 0f;
 
             gunRecoil.RecoilFire();
