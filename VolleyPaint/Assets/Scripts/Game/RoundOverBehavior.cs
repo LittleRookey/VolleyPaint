@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
 public class RoundOverBehavior : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class RoundOverBehavior : MonoBehaviour
             {
                 manager.EndRoundServerRpc(Team.teamOne);
             }
+            MasterAudio.PlaySound3DAtVector3("Bouncing", transform.position);
         }
     }
 }

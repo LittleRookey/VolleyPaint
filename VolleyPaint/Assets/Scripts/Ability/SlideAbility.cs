@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
 [CreateAssetMenu(menuName ="Litkey/Ability/SlideAbility")]
 public class SlideAbility : Ability
@@ -28,6 +29,8 @@ public class SlideAbility : Ability
 
         Animator anim = parent.transform.Find("unitychan").GetComponent<Animator>();
         anim.SetBool("Sliding", true);
+
+        MasterAudio.PlaySound3DAtVector3("Sliding", parent.transform.position); // Play sound
 
     }
 

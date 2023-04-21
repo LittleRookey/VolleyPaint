@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using DarkTonic.MasterAudio;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -65,6 +66,16 @@ public class PlayerMovement : NetworkBehaviour
 			Vector3 targetMoveAmount = moveDir * walkSpeed;
 			moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
+			// Toggle on/off running sound
+			if (moveAmount.magnitude >= 0.2f && grounded)
+            {
+				MasterAudio.PlaySound3DAtVector3("Running", transform.position);
+			}
+			else
+            {
+				MasterAudio.StopAllOfSound("Running");
+			}
+
         }
 
 		// jump
@@ -87,6 +98,10 @@ public class PlayerMovement : NetworkBehaviour
 
 		if (Physics.Raycast(ray, out hit, 1 + .1f, groundedMask))
 		{
+			if (grounded == false) // Play landing sound upon immediately touching ground
+            {
+				MasterAudio.PlaySound3DAtVector3("Landing", transform.position);
+			}
 			grounded = true;
 			jumpsLeft = extraJumps;
 		}

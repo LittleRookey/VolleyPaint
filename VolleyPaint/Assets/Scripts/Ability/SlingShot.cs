@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Blobcreate.Universal;
 using Blobcreate.ProjectileToolkit;
+using DarkTonic.MasterAudio;
 
 [CreateAssetMenu(menuName = "Litkey/Ability/Projectile/SlingShot")]
 public class SlingShot : Ability
@@ -128,8 +129,9 @@ public class SlingShot : Ability
 	{
 		rb.isKinematic = false;
 		Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 300f, groundMask);
-        //Fire(hit.point);
-        ball.GetComponent<BallBehaviour>().FireServerRPC(hit.point, currentA);
+		//Fire(hit.point);
+		MasterAudio.PlaySound3DAtVector3("Slingshot", ball.transform.position);
+		ball.GetComponent<BallBehaviour>().FireServerRPC(hit.point, currentA);
 		currentA = smallA;
 		currentTorque = 0f;
 	}

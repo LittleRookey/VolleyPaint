@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
 [CreateAssetMenu(menuName ="Litkey/Ability/SuperJump")]
 public class SuperJump : Ability
@@ -60,6 +61,7 @@ public class SuperJump : Ability
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // zeroes y velocity because when pressing regular jump at same time, you go insanely high
         rb.AddForce(Vector3.up * currentEnergy);
+        MasterAudio.PlaySound3DAtVector3("Superjump", parent.transform.position);
 
         currentEnergy = 0f;
         parent.GetComponent<PlayerMovement>().walkSpeed = originSpeed;
