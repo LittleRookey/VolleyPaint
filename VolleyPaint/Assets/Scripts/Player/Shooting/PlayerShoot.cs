@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode.Components;
 using DarkTonic.MasterAudio;
 using Unity.Netcode;
 using DG.Tweening;
@@ -51,7 +52,7 @@ public class PlayerShoot : NetworkBehaviour
 
     public GunRecoil gunRecoil;
 
-    private Animator anim;
+    private NetworkAnimator anim;
 
     //[SerializeField] private DOTweenAnimation reloadAnimation;
 
@@ -69,7 +70,7 @@ public class PlayerShoot : NetworkBehaviour
         reloadTimeElapsed = 0.0f;
         bulletsLeft = bulletLimit;
 
-        anim = transform.Find("unitychan").GetComponent<Animator>();
+        anim = transform.Find("unitychan").GetComponent<NetworkAnimator>();
     }
 
 

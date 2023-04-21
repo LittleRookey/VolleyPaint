@@ -585,6 +585,7 @@ MonoBehaviour:
     type: 3}
   ballSpeed: 2000
   ballJumpSpeed: 1000
+  fireRateCountDown: 0
   reloadCooldown: 2
   bulletLimit: 3
   gunController: {fileID: 7724618796283051061}
@@ -1026,6 +1027,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f0565f23a2b58541a475bd3c1393052, type: 3}
+--- !u!95 &3032288197883420166 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 8f0565f23a2b58541a475bd3c1393052,
+    type: 3}
+  m_PrefabInstance: {fileID: 3032288197890780006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3032288197890681984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100326, guid: 8f0565f23a2b58541a475bd3c1393052,
+    type: 3}
+  m_PrefabInstance: {fileID: 3032288197890780006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6366708095646774635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3032288197890681984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72208118779a3943855874b40fa2979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 3032288197883420166}
 --- !u!4 &3032288197890912416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400326, guid: 8f0565f23a2b58541a475bd3c1393052,
