@@ -42,9 +42,9 @@ public class GunController : NetworkBehaviour
 
     void Update()
     {
+        
         if (!isTestingWithoutNetwork)
-            if (!IsOwner) return;
-
+            if (IsOwner) return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangeGunMode(eShootType.Normal);
@@ -72,6 +72,10 @@ public class GunController : NetworkBehaviour
 
     public void ReloadGunAnimation(float lapsedTime, float cooldownTime)
     {
+        // make gun spin
+        float angle = Mathf.Min(1.0f, lapsedTime / cooldownTime) * 360;
+        guns[activeGunIndex].transform.eulerAngles = new Vector3(3 * angle, transform.rotation.y, transform.rotation.z);
+
         // If it's in the first half of the cooldown, bring the gun towards the player
         // Otherwise, bring it away from the player
         // To be fixed

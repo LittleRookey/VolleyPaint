@@ -96,7 +96,7 @@ public class PlayerShoot : NetworkBehaviour
             }
 
             // Manage animations for the gun
-            //gunController.ReloadGunAnimation(reloadTimeElapsed, reloadCooldown);
+            gunController.ReloadGunAnimation(reloadTimeElapsed, reloadCooldown);
 
             // End reloading
             if (reloadTimeElapsed >= reloadCooldown)

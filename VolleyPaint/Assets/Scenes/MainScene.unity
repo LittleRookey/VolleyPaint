@@ -8167,6 +8167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: newBall
       objectReference: {fileID: 0}
+    - target: {fileID: 543091009356626972, guid: 548330eb8312d2a4383d9b6cc554d3b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548330eb8312d2a4383d9b6cc554d3b0, type: 3}
 --- !u!1 &1240629145
@@ -14580,6 +14585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ForceField_vfx
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767094723219227731, guid: ca7e211594f3a44478ae59ecaae0362d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3767094723219227732, guid: ca7e211594f3a44478ae59ecaae0362d,
         type: 3}
